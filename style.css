@@ -19,7 +19,7 @@ body, html {
     transform: translate(-50%, -50%);
     width: 1700px; /* 依你的圖片比例調整 */
     height: 1160px;
-    background-image: url('images/openpage.png'); /* 放入你畫的人頭 */
+    background-image: url('images/openpage.PNG'); /* 放入你畫的人頭 */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
