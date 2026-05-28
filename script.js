@@ -11,14 +11,14 @@ resizeCanvas();
 
 // 預載入金魚的圖片
 const fishImage = new Image();
-fishImage.src = 'images/fish.PNG'; // 確保圖片路徑正確
+fishImage.src = 'images/fish.PNG'; // 確保 GitHub 上 images 資料夾內為 fish.PNG
 
 // 定義金魚群的資料
 const fishes = [
     {
         x: 200, y: 200,             // 金魚初始位置
         anchorX: 600, anchorY: 300,   // 線的另一端（固定點）
-        vx: 0.6, vy: 0.15,          // ★ 速度調慢（原本為 2.0 / 0.5）
+        vx: 0.6, vy: 0.15,          // 游動速度
         size: 120,                  // 金魚尺寸
         angle: 0,                   // 用於垂直方向的微幅上下波浪律動
         url: 'project1.html'        // 點擊跳轉的專案頁面
@@ -26,26 +26,26 @@ const fishes = [
     {
         x: 600, y: 400,
         anchorX: 500, anchorY: 350,
-        vx: -0.5, vy: -0.1,         // ★ 速度調慢（原本為 -1.8 / -0.4）
-        size: 110,                  // 金魚尺寸
+        vx: -0.5, vy: -0.1,
+        size: 110,
         angle: Math.PI / 2,
         url: 'project2.html'
     },
     {
         x: 300, y: 400,
         anchorX: 700, anchorY: 400,
-        vx: -0.5, vy: -0.15,         // ★ 速度調慢（原本為 -1.8 / -0.4）
-        size: 110,                  // 金魚尺寸
+        vx: -0.5, vy: -0.15,
+        size: 110,
         angle: 0,
         url: 'project3.html'
     },
     {
         x: 1000, y: 600,
         anchorX: 1000, anchorY: 350,
-        vx: -0.5, vy: -0.1,         // ★ 速度調慢（原本為 -1.8 / -0.4）
-        size: 110,                  // 金魚尺寸
+        vx: -0.5, vy: -0.1,
+        size: 110,
         angle: Math.PI / 2,
-        url: 'project2.html'
+        url: 'project4.html'
     }
 ];
 
@@ -57,7 +57,7 @@ function animate() {
         // 1. 位置更新：讓金魚依照速度前進
         fish.x += fish.vx;
 
-        // 讓 Y 軸帶有一點自然的波浪上下律動（頻率與幅度也同步調順）
+        // 讓 Y 軸帶有一點自然的波浪上下律動
         fish.angle += 0.01;
         fish.y += fish.vy + Math.sin(fish.angle) * 0.2;
 
@@ -79,7 +79,7 @@ function animate() {
         // 3. 畫固定不動的「點」
         ctx.beginPath();
         ctx.arc(fish.anchorX, fish.anchorY, 4, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 59, 48, 0.6)'; // 錨點維持白色（可依喜好換色）
+        ctx.fillStyle = 'rgba(255, 59, 48, 0.6)'; // 紅色錨點
         ctx.fill();
 
         // 4. 畫連接金魚與點的「線」
@@ -87,13 +87,12 @@ function animate() {
         ctx.moveTo(fish.anchorX, fish.anchorY);
         ctx.lineTo(fish.x, fish.y);
 
-        // ★ 線條顏色改為紅色（使用帶透明度的 rgba 紅色，看起來更有神祕感）
-        ctx.strokeStyle = 'rgba(255, 59, 48, 0.6)';
-        ctx.lineWidth = 1.5; // 稍微加粗一點點讓紅線更明顯
+        ctx.strokeStyle = 'rgba(255, 59, 48, 0.6)'; // 紅色連線
+        ctx.lineWidth = 1.5; 
         ctx.stroke();
 
-        // 5. 畫金魚（配合移動方向進行水平翻轉）
-        if (fishImage.complete) {
+        // 5. 畫金魚（安全檢查：確保圖片載入成功且寬度大於 0 才繪製）
+        if (fishImage.complete && fishImage.naturalWidth > 0) {
             ctx.save();
             ctx.translate(fish.x, fish.y);
 
@@ -109,11 +108,15 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// 啟動動畫
+// ★ 嚴格控管：只有當圖片確實載入成功後，才啟動畫布動畫
 fishImage.onload = () => {
     animate();
 };
-animate();
+
+// 如果圖片已經在快取中，直接啟動
+if (fishImage.complete) {
+    animate();
+}
 
 // 點擊偵測
 canvas.addEventListener('click', function (event) {
@@ -132,7 +135,7 @@ canvas.addEventListener('click', function (event) {
     }
 });
 
-// 監聽滑鼠移動，當滑鼠碰到金魚時改變游標狀態
+// 監聽滑鼠移動
 canvas.addEventListener('mousemove', function (event) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
@@ -140,22 +143,19 @@ canvas.addEventListener('mousemove', function (event) {
 
     let isHoveringFish = false;
 
-    // 檢查滑鼠有沒有碰到任何一隻金魚
     for (let i = 0; i < fishes.length; i++) {
         const fish = fishes[i];
         const distance = Math.sqrt((mouseX - fish.x) ** 2 + (mouseY - fish.y) ** 2);
 
-        // 如果滑鼠與金魚中心點的距離小於金魚半徑，代表滑鼠正停在魚身上
         if (distance < fish.size / 2) {
             isHoveringFish = true;
-            break; // 只要碰到一隻就足夠判斷了
+            break;
         }
     }
 
-    // 根據偵測結果改變滑鼠樣式
     if (isHoveringFish) {
-        canvas.style.cursor = 'pointer';  // 變成小手
+        canvas.style.cursor = 'pointer';
     } else {
-        canvas.style.cursor = 'default';  // 變回普通箭頭
+        canvas.style.cursor = 'default';
     }
 });
