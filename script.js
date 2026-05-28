@@ -11,7 +11,7 @@ resizeCanvas();
 
 // 預載入金魚的圖片
 const fishImage = new Image();
-fishImage.src = 'images/Fish.PNG'; // 確保圖片路徑正確
+fishImage.src = 'images/fish.png'; // 確保圖片路徑正確
 
 // 定義金魚群的資料
 const fishes = [
