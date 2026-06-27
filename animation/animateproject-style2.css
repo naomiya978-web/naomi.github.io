@@ -1,0 +1,652 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+/* ===================================================
+   滿版基礎板塊設定
+   =================================================== */
+.project-container {
+    width: 100%;
+}
+
+.project-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.section-common-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.5rem;
+    color: #000000;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+/* ===================================================
+   📌 第一個板塊：滿版左右圖文
+   =================================================== */
+.full-page-intro {
+    background-color: #ffffff;
+    padding: 0;
+}
+
+.intro-content-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    z-index: 20;
+}
+
+.intro-left {
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.project-img-box-1 {
+    width: 100%;
+    height: 420px;
+    border-top: 3px solid #000000;
+    border-bottom: 3px solid #000000;
+    border-right: 3px solid #000000;
+    background-color: #f5f5f5;
+    overflow: hidden;
+    box-shadow: none;
+    transform: translateY(20px);
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.intro-right {
+    width: 50vw;
+    padding: 0 8vw 0 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.safe-zone-content {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-title {
+    font-family: 'Press Start 2P', monospace;
+    color: #ff3b30;
+    letter-spacing: 2px;
+    line-height: 1.3;
+    font-size: 3rem;
+    margin-bottom: 35px;
+    transform: translateY(-30px);
+}
+.project-title2 {
+    font-family: 'Press Start 2P', monospace;
+    color: #ff3b30;
+    letter-spacing: 2px;
+    line-height: 1.3;
+    font-size: 3rem;
+    margin-bottom: 35px;
+    transform: translateY(-30px);
+}
+
+.introduction-text {
+    font-family: 'Roboto', system-ui, sans-serif;
+    font-size: 1.1rem;
+    color: #000000;
+    line-height: 2.0;
+    font-weight: 300;
+    transform: translateY(-30px);
+}
+
+    .introduction-text p {
+        margin-bottom: 25px;
+    }
+
+        .introduction-text p:last-child {
+            margin-bottom: 0;
+        }
+
+.bottom-bg-decor {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    z-index: 10;
+    pointer-events: none;
+    width: 500px;
+    height: auto;
+}
+
+    .bottom-bg-decor img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+/* ===================================================
+   📌 新增：第一板塊文字下方的藍色長方形標籤
+   =================================================== */
+.project-tag-box {
+    display: inline-block; /* 讓長方形轉為行內區塊 */
+    width: max-content; /* ✨ 核心修改：寬度剛好等於文字長度，絕對不撐長 ✨ */
+    margin-top: 20px; /* 與上方介紹文字保持 20px 的間距 */
+    background-color: #0000FF; /* 藍色背景 */
+    color: #FFFFFF; /* 白色文字 */
+    font-family: 'Press Start 2P', monospace; /* 保持復古像素字體 */
+    font-size: 0.8rem; /* 文字大小 */
+    padding: 8px 16px; /* 長方形的上下與左右内邊距（可透過這裡調整長方形胖瘦） */
+    border: 2px solid #FFFFFF; /* 白色細邊框 */
+    text-transform: uppercase; /* 自動將英文轉為大寫 */
+    letter-spacing: 1px; /* 字距稍微加寬 */
+}
+
+/* ===================================================
+   📌 第四個板塊：本地 MP4 影片
+   =================================================== */
+.full-page-video {
+    background-image: url('../images/animation2/animation2bg2.png');
+    background-size: cover; /* 🛠️ 自動縮放圖片以完全覆蓋整個板塊 */
+    background-position: center; /* 🛠️ 讓圖片置中，這樣裁切時會從四周對稱裁切 */
+    background-repeat: no-repeat; /* 🛠️ 防止圖片太小時出現重複拼貼 */
+    border-top: none;
+    padding: 0 60px;
+    position: relative;
+}
+
+.video-content-wrapper {
+    width: 100%;
+    max-width: 750px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+}
+
+.video-section-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.5rem;
+    color: #000000;
+    text-align: center;
+    align-self: unset;
+    letter-spacing: 1px;
+}
+
+.video-local-wrapper {
+    width: 100%;
+    border: 3px solid #000000;
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.1);
+    background-color: #000000;
+    font-size: 0;
+}
+
+.project-local-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    outline: none;
+}
+
+
+/* ===================================================
+   右側固定選單按鈕與側邊欄樣式（完整保留）
+   =================================================== */
+.menu-toggle {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 32px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 999999 !important;
+}
+
+    .menu-toggle .bar {
+        width: 100%;
+        height: 4px;
+        background-color: #0000FF;
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+        background-color: #ffffff;
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+        background-color: #ffffff;
+    }
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999990 !important;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+    transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+    .sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.sidebar-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #0000FF;
+    padding: 80px 50px;
+    display: flex;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-overlay.open .sidebar-box {
+    transform: translateX(0);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.sidebar-link {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+    .sidebar-link:hover {
+        color: #ff3b30;
+        transform: translateX(10px);
+    }
+
+.sidebar-social-grid {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-btn {
+    width: 52px;
+    height: 52px;
+    background-color: #050b14;
+    border: 2px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+    .social-btn img {
+        width: 65%;
+        height: 65%;
+        object-fit: contain;
+    }
+
+    .social-btn:hover {
+        transform: scale(1.1);
+        border-color: #ff3b30;
+        background-color: #000000;
+    }
+
+.retro-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9999999 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+    .retro-modal-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.retro-window {
+    width: 350px;
+    background-color: #0000FF;
+    border: 3px solid #ffffff;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+}
+
+.retro-title-bar {
+    background-color: #ffffff;
+    color: #0000FF;
+    padding: 6px 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.retro-close-x {
+    cursor: pointer;
+    padding: 2px 6px;
+    font-weight: bold;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+    .retro-close-x:hover {
+        background-color: #ff3b30;
+        color: #ffffff;
+    }
+
+.retro-body {
+    padding: 35px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.retro-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #ffffff;
+    line-height: 1.8;
+    word-break: break-all;
+}
+
+.retro-ok-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    color: #ffffff;
+    background: transparent;
+    border: 2px solid #ffffff;
+    padding: 8px 32px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .retro-ok-btn:hover {
+        background-color: #ffffff;
+        color: #0000FF;
+    }
+
+/* ===================================================
+   📌 第五個板塊：外部網站連結板塊樣式
+   =================================================== */
+.full-page-website {
+    background-image: url('../images/game1/game1bg4.png'); /* 與第四板塊相同的背景圖 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top: none;
+    padding: 0 4vw;
+}
+
+.web-window-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+/* 仿系統視窗外框 */
+.retro-web-window {
+    width: 100%;
+    max-width: 550px;
+    background-color: #0000FF; /* 經典藍底 */
+    border: 3px solid #ffffff; /* 白邊 */
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3); /* 復古陰影 */
+}
+
+/* 視窗頂部標題列 */
+.web-window-titlebar {
+    background-color: #ffffff;
+    color: #0000FF;
+    padding: 10px 16px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #ffffff;
+}
+
+.web-window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.web-win-btn {
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 視窗內部內容區 */
+.web-window-body {
+    padding: 40px 30px;
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.web-window-heading {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.web-window-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 420px;
+    margin-bottom: 15px;
+}
+
+/* 點擊前往網站的按鈕 */
+.web-redirect-btn {
+    display: inline-block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.85rem;
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    padding: 12px 35px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+    /* 按鈕 Hover 與點擊特效 */
+    .web-redirect-btn:hover {
+        background-color: #ffffff;
+        color: #0000FF;
+    }
+
+    .web-redirect-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    }
+
+/* ===================================================
+   手機版響應式微調 (RWD)
+   =================================================== */
+@media (max-width: 900px) {
+    .project-section {
+        height: auto;
+        min-height: 100vh;
+        padding: 60px 24px;
+    }
+
+    .intro-content-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .intro-left, .intro-right {
+        width: 100% !important;
+        padding: 0 !important;
+        height: auto !important;
+    }
+
+    .intro-right {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-title {
+        order: 1;
+        font-size: 2.2rem !important;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    .intro-left {
+        order: 2;
+    }
+
+    .project-img-box-1 {
+        border-left: 3px solid #000000;
+        height: 240px !important;
+        transform: none !important;
+    }
+
+    .introduction-text {
+        order: 3;
+        margin-top: 20px;
+    }
+
+    .bottom-bg-decor {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        margin-top: 30px;
+        width: 150px;
+        order: 4;
+    }
+
+    .carousel-card {
+        width: 280px;
+        height: 180px;
+    }
+
+    .carousel-slider {
+        height: 260px;
+    }
+
+    .carousel-card.next {
+        transform: translate3d(100px, 0, -80px) scale(0.8);
+    }
+
+    .carousel-card.prev {
+        transform: translate3d(-100px, 0, -80px) scale(0.8);
+    }
+
+    .carousel-arrow::after {
+        border-width: 12px 16px 12px 0;
+    }
+
+    .arrow-right::after {
+        border-width: 12px 0 12px 16px;
+    }
+
+    .characters-container {
+        flex-direction: column;
+        height: auto;
+        gap: 30px;
+    }
+
+    .char-avatar-menu {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .avatar-item {
+        width: 60px;
+        height: 60px;
+    }
+
+    .char-panel {
+        position: relative;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .char-center-lipic {
+        width: 100%;
+        height: 350px;
+        margin-bottom: 20px;
+    }
+
+    .char-right-info {
+        width: 100%;
+        justify-content: center;
+    }
+}
