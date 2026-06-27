@@ -15,7 +15,7 @@ if (canvas) {
     resizeCanvas();
 
     const fishImage = new Image();
-    fishImage.src = 'images/fish.PNG';
+    fishImage.src = 'images/fish.png';
 
     const FISH_COUNT = 10;
     const FISH_SIZE = 80;
