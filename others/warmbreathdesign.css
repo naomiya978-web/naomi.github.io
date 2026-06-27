@@ -1,0 +1,411 @@
+﻿/* ==========================================================================
+   🎨 全局基礎設定
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   💥 第一板塊：主視覺與毛玻璃灰色調呼吸按鈕
+   ========================================================================== */
+#p2-section1 {
+    width: 100%;
+    height: 100vh;
+    /* 💡 這裡已為你配置好預留的背景圖 other2bg1.png */
+    background: url('../images/others2/other2bg1.png') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    padding-left: 15%; /* 💡 讓控制面板靠畫面左側偏中 */
+}
+
+/* 左側控制面板（包含文字與按鈕） */
+.p2-s1-control-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px; /* 文字與按鈕之間的間距 */
+}
+
+/* 按鈕上方文字 */
+.p2-s1-text {
+    font-family: 'Albert Sans', sans-serif;
+    color: #000000; /* 黑色字 */
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* ✨ 核心修改：打造超柔和邊緣與極致毛玻璃 */
+.p2-breath-btn {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%; /* 完美正圓 */
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #000000;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 1. 毛玻璃與柔和灰調基底 */
+    background: rgba(230, 230, 230, 0.25);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    /* 2. 徹底消除僵硬邊緣：改用非常淡的白邊，加上多層羽化陰影做出「暈染漸變」 */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px 2px rgba(200, 200, 200, 0.2), /* 內圈柔和暈染 */
+    0 0 40px 10px rgba(220, 220, 220, 0.15), /* 外圈迷霧擴散，消除生硬感 */
+    inset 0 0 15px rgba(255, 255, 255, 0.3);
+    /* 讓滑鼠移開時平滑恢復 */
+    transition: transform 0.6s ease, box-shadow 0.6s ease, background 0.6s ease;
+}
+
+    /* ==========================================================================
+   ✨ 核心動畫：當鼠標靠近時，觸發無限循環的「一收一放」呼吸動畫
+   ========================================================================== */
+    .p2-breath-btn:hover {
+        background: rgba(215, 215, 215, 0.35);
+        /* 💡 綁定自訂的 breathAnim 動態：2.4秒一個循環、平滑進出、無限重複 */
+        animation: breathAnim 2.4s ease-in-out infinite;
+    }
+
+    /* 按下時的微縮反饋 */
+    .p2-breath-btn:active {
+        animation: none; /* 按下時暫停呼吸 */
+        transform: scale(0.95);
+    }
+
+/* ==========================================================================
+   🌀 呼吸動畫軌跡定義（由小變大，再由大變小，且外發光跟著忽隱忽現）
+   ========================================================================== */
+@keyframes breathAnim {
+    0% {
+        transform: scale(1.0);
+        box-shadow: 0 0 20px 2px rgba(200, 200, 200, 0.2), 0 0 40px 10px rgba(220, 220, 220, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    50% {
+        transform: scale(1.12); /* 💡 吸氣：放大到 1.12 倍 */
+        box-shadow: 0 0 30px 6px rgba(180, 180, 180, 0.3), /* ✨ 放大時外圍的光暈跟著擴散變亮 */
+        0 0 60px 20px rgba(200, 200, 200, 0.25), inset 0 0 20px rgba(255, 255, 255, 0.4);
+    }
+
+    100% {
+        transform: scale(1.0); /* 💡 吐氣：回復原狀 */
+        box-shadow: 0 0 20px 2px rgba(200, 200, 200, 0.2), 0 0 40px 10px rgba(220, 220, 220, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* ==========================================================================
+   💥 第二板塊：現代不對稱高級畫廊網格排版 (8張圖)
+   ========================================================================== */
+#p2-section2 {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #FFFFFF;
+    padding: 80px 6%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 建立網格骨架 */
+.p2-gallery-grid {
+    width: 100%;
+    max-width: 1400px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12欄精密網格 */
+    gap: 24px; /* 圖片之間的間隙 */
+}
+
+/* 單個圖片外殼通用設定 */
+.gallery-item {
+    width: 100%;
+    overflow: hidden;
+    background-color: #F5F5F5;
+}
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover; /* 確保圖片不縮放變形，完美切割 */
+    }
+
+/* 📐 依據手稿（image_9abe42.png）分配這 8 張圖的跨度位置，形成高低錯落感 */
+
+/* 第一張：左邊主視覺大圖（佔 5 欄） */
+.item-large-left {
+    grid-column: span 5;
+    grid-row: span 2;
+    aspect-ratio: 4 / 5;
+}
+
+/* 第二張：中間細長掛飾圖（佔 3 欄） */
+.item-vertical-mid {
+    grid-column: span 3;
+    grid-row: span 2;
+    aspect-ratio: 3 / 5;
+}
+
+/* 第三張：右邊壁掛招牌正方形圖（佔 4 欄） */
+.item-square-right {
+    grid-column: span 4;
+    aspect-ratio: 1 / 1;
+}
+
+/* 第四張：右下方橫向大圖（橫跨整個右半部區塊） */
+.item-wide-bottom {
+    grid-column: span 4;
+    aspect-ratio: 16 / 10;
+}
+
+/* 第五、六張：下方並排的小元件展示圖（各佔 3 欄） */
+.item-small {
+    grid-column: span 3;
+    aspect-ratio: 4 / 3;
+}
+
+/* 第七、八張：最底部收尾的中型展示圖（各佔 3 欄） */
+.item-medium {
+    grid-column: span 3;
+    aspect-ratio: 1 / 1;
+}
+
+/* 📱 行動裝置（手機）響應式優化：自動轉為乾淨的單欄排版 */
+@media (max-width: 900px) {
+    .p2-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item {
+        grid-column: span 1 !important;
+        aspect-ratio: auto !important;
+    }
+}
+
+/* ===================================================
+   📌 右側選單按鈕與側邊欄樣式 (保持原樣)
+   =================================================== */
+.menu-toggle {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 32px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 999999 !important;
+}
+
+    .menu-toggle .bar {
+        width: 100%;
+        height: 4px;
+        background-color: #0000FF;
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+        background-color: #ffffff;
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+        background-color: #ffffff;
+    }
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999990 !important;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+    transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+    .sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.sidebar-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #0000FF;
+    padding: 80px 50px;
+    display: flex;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-overlay.open .sidebar-box {
+    transform: translateX(0);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.sidebar-link {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+    .sidebar-link:hover {
+        color: #ff3b30;
+        transform: translateX(10px);
+    }
+
+.sidebar-social-grid {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-btn {
+    width: 52px;
+    height: 52px;
+    background-color: #050b14;
+    border: 2px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+    .social-btn img {
+        width: 65%;
+        height: 65%;
+        object-fit: contain;
+    }
+
+    .social-btn:hover {
+        transform: scale(1.1);
+        border-color: #ff3b30;
+        background-color: #000000;
+    }
+
+/* ===================================================
+   📌 原始 Contact 彈出視窗固定樣式
+   =================================================== */
+.retro-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9999999 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+    .retro-modal-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .retro-modal-overlay .retro-window {
+        width: 350px;
+        background-color: #0000FF;
+        border: 3px solid #ffffff;
+        box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+    }
+
+.retro-title-bar {
+    background-color: #ffffff;
+    color: #0000FF;
+    padding: 6px 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.retro-close-x {
+    cursor: pointer;
+    padding: 2px 6px;
+    font-weight: bold;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+    .retro-close-x:hover {
+        background-color: #ff3b30;
+        color: #ffffff;
+    }
+
+.retro-body {
+    padding: 35px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.retro-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #ffffff;
+    line-height: 1.8;
+    word-break: break-all;
+}
+
+.retro-ok-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    color: #ffffff;
+    background: transparent;
+    border: 2px solid #ffffff;
+    padding: 8px 32px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .retro-ok-btn:hover {
+        background-color: #ffffff;
+        color: #0000FF;
+    }
+

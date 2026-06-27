@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品詳情頁面 - 呼吸設計</title>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../others/warmbreathdesign.css">
+</head>
+<body>
+
+    <section id="p2-section1">
+        <div class="p2-s1-control-panel">
+            <p class="p2-s1-text">Absorb our life and respond to your needs</p>
+
+            <button class="p2-breath-btn" onclick="scrollToSection2()">Breath</button>
+        </div>
+    </section>
+
+
+    <section id="p2-section2">
+        <div class="p2-gallery-grid">
+            <div class="gallery-item item-large-left">
+                <img src="../images/others2/othersimage1.png" alt="設計展示 1">
+            </div>
+            <div class="gallery-item item-vertical-mid">
+                <img src="../images/others2/othersimage2.png" alt="設計展示 2">
+            </div>
+            <div class="gallery-item item-square-right">
+                <img src="../images/others2/othersimage3.png" alt="設計展示 3">
+            </div>
+            <div class="gallery-item item-wide-bottom">
+                <img src="../images/others2/othersimage4.png" alt="設計展示 4">
+            </div>
+            <div class="gallery-item item-small">
+                <img src="../images/others2/othersimage5.png" alt="設計展示 5">
+            </div>
+            <div class="gallery-item item-small">
+                <img src="../images/others2/othersimage6.png" alt="設計展示 6">
+            </div>
+            <div class="gallery-item item-medium">
+                <img src="../images/others2/othersimage7.png" alt="設計展示 7">
+            </div>
+            <div class="gallery-item item-medium">
+                <img src="../images/others2/othersimage8.png" alt="設計展示 8">
+            </div>
+        </div>
+    </section>
+
+    <div class="menu-toggle" id="menuToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay">
+        <div class="sidebar-box">
+            <nav class="sidebar-nav">
+                <a href="../main.html" class="sidebar-link">Home</a>
+                <a href="../game.html" class="sidebar-link">Game</a>
+                <a href="../animation.html" class="sidebar-link">Animation</a>
+                <a href="../illustration.html" class="sidebar-link">Illustration</a>
+                <a href="../others.html" class="sidebar-link">Others</a>
+                <a href="../about.html" class="sidebar-link">About Me</a>
+                <span class="sidebar-link" id="contractTrigger">Contact</span>
+                <div class="sidebar-social-grid">
+                    <a href="https://www.instagram.com/naommii.0?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn">
+                        <img src="../images/instagram-icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.pixiv.net/users/65923520" target="_blank" class="social-btn">
+                        <img src="../images/pixiv-icon.png" alt="Pixiv">
+                    </a>
+                    <a href="https://youtube.com/@naomi-ya?si=92hBufzmrzh-5EYt" target="_blank" class="social-btn">
+                        <img src="../images/youtube-icon.png" alt="Youtube">
+                    </a>
+                    <a href="https://space.bilibili.com/238136268/upload/video" target="_blank" class="social-btn">
+                        <img src="../images/bilibili-icon.png" alt="BiliBili">
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="retro-modal-overlay" id="retroModal">
+        <div class="retro-window">
+            <div class="retro-title-bar">
+                <span class="retro-title-text">Contact</span>
+                <div class="retro-close-x" id="modalXClose">X</div>
+            </div>
+            <div class="retro-body">
+                <p class="retro-text">EMAIL:<br>naomiya978@gmail.com</p>
+                <button class="retro-ok-btn" id="modalOkClose">Send</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function scrollToSection2() {
+            document.getElementById('p2-section2').scrollIntoView({
+                behavior: 'smooth' // ✨ 讓頁面優雅地平滑滾動到第二板塊
+            });
+        }
+    </script>
+
+    <script src="../main-script.js"></script>
+
+</body>
+</html>

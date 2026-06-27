@@ -1,0 +1,437 @@
+﻿/* ==========================================================================
+   🎨 全局基礎設定 & 字體定義
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f0f0f0;
+    overflow-x: hidden;
+}
+
+/* 👑 明朝體（襯線體）定義：優先使用網頁安全明體與日式明朝體 */
+.serif-text {
+    font-family: "MS Mincho", "MS PMincho", "Noto Serif TC", "Noto Serif JP", "Hiragino Mincho ProN", "Georgia", serif;
+}
+
+/* 👾 像素復古字體定義 */
+.pixel-font {
+    font-family: 'Press Start 2P', monospace;
+}
+
+/* 板塊通用樣式 */
+section {
+    width: 100%;
+    min-height: 100vh; /* 每個板塊預設佔滿一整螢幕高度 */
+    display: flex;
+    position: relative;
+}
+
+/* ==========================================================================
+   💥 第一板塊：主視覺全螢幕背景 + 中央大字
+   ========================================================================== */
+#section1 {
+    /* 💡 請在這裡替換你的 bg1.png 圖片路徑 */
+    background: url('../images/others1/bg1.png') no-repeat center center;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.s1-center-text {
+    color: #FFFFFF; /* 白色字 */
+    font-weight: bold;
+    /* ✨ 自由修改區：在這裡可以直接調整字體大小 */
+    font-size: 4rem;
+    letter-spacing: 4px;
+}
+
+/* ==========================================================================
+   💥 第二板塊：左右雙欄（左人物，右復古視窗介紹）
+   ========================================================================== */
+#section2 {
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    padding: 50px 10%;
+}
+
+/* 左邊人物圖容器 */
+.s2-char-img-box {
+    flex: 0 0 500px; /* 固定人物圖最大寬度 400px */
+    max-width: 100%;
+}
+
+    .s2-char-img-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+/* 右邊復古視窗效果 */
+.s2-retro-window {
+    flex: 1;
+    background-color: #FFFFFF;
+    border: 3px solid #0000FF; /* 經典藍色邊框 */
+    box-shadow: 8px 8px 0px 0px rgba(0, 0, 255, 0.2); /* 復古陰影 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 視窗頂部標題列 */
+.s2-window-titlebar {
+    background-color: #0000FF;
+    color: #FFFFFF;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 視窗內部內容區 */
+.s2-window-body {
+    padding: 30px;
+}
+
+.s2-char-name {
+    color: #0000FF;
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    border-bottom: 2px dashed #0000FF;
+    padding-bottom: 10px;
+}
+
+/* 依次排序的 6 樣介紹清單 */
+.s2-info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.s2-info-item {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333333;
+    font-family: sans-serif;
+}
+
+.s2-info-label {
+    font-weight: bold;
+    color: #0000FF;
+    margin-right: 8px;
+}
+
+/* ==========================================================================
+   💥 第三板塊：左右雙圖並排
+   ========================================================================== */
+#section3 {
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 5%;
+}
+
+.s3-img-box {
+    flex: 1;
+    border: 2px solid #0000FF; /* 延續藍色復古邊框 */
+    overflow: hidden;
+}
+
+    .s3-img-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+
+#section4 {
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 5%;
+}
+
+.s4-img-box {
+    flex: 1;
+    border: 2px solid #0000FF; /* 延續藍色復古邊框 */
+    overflow: hidden;
+}
+
+    .s4-img-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+#section5 {
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 5%;
+}
+
+.s5-img-box {
+    flex: 1;
+    border: 2px solid #0000FF; /* 延續藍色復古邊框 */
+    overflow: hidden;
+}
+
+    .s5-img-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+/* ==========================================================================
+   💥 第四、五、六板塊：人物故事背景通用樣式
+   ========================================================================== */
+.story-section {
+    background-color: #FFFFFF;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 15%;
+    text-align: center; /* ✨ 文字靠中對齊 */
+}
+
+    /* 為了錯開板塊顏色，讓視覺更豐富，給奇數故事板塊上淡淡的灰色背景 */
+    .story-section:nth-child(odd) {
+        background-color: #FFFFFF;
+    }
+
+.story-container {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px; /* 每段故事之間的垂直間距 */
+    justify-content: center; /* 中間對齊 */
+}
+
+.story-paragraph {
+    color: #000000; /* ✨ 黑色字 */
+    font-size: 1.15rem;
+    line-height: 2; /* 較寬的行高，讓明朝體更有呼吸感 */
+    letter-spacing: 1px;
+    word-break: break-word;
+}
+
+/* ===================================================
+   5. 右側固定選單按鈕與側邊欄樣式 (結構保持不變)
+   =================================================== */
+.menu-toggle {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 32px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 999999 !important;
+}
+
+    .menu-toggle .bar {
+        width: 100%;
+        height: 4px;
+        background-color: #0000FF;
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+        background-color: #ffffff;
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+        background-color: #ffffff;
+    }
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999990 !important;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+    transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+    .sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.sidebar-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #0000FF;
+    padding: 80px 50px;
+    display: flex;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-overlay.open .sidebar-box {
+    transform: translateX(0);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.sidebar-link {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+    .sidebar-link:hover {
+        color: #ff3b30;
+        transform: translateX(10px);
+    }
+
+.sidebar-social-grid {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-btn {
+    width: 52px;
+    height: 52px;
+    background-color: #050b14;
+    border: 2px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+    .social-btn img {
+        width: 65%;
+        height: 65%;
+        object-fit: contain;
+    }
+
+    .social-btn:hover {
+        transform: scale(1.1);
+        border-color: #ff3b30;
+        background-color: #000000;
+    }
+
+.retro-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9999999 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+    .retro-modal-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.retro-window {
+    width: 350px;
+    background-color: #0000FF;
+    border: 3px solid #ffffff;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+}
+
+.retro-title-bar {
+    background-color: #ffffff;
+    color: #0000FF;
+    padding: 6px 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.retro-close-x {
+    cursor: pointer;
+    padding: 2px 6px;
+    font-weight: bold;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+    .retro-close-x:hover {
+        background-color: #ff3b30;
+        color: #ffffff;
+    }
+
+.retro-body {
+    padding: 35px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.retro-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #ffffff;
+    line-height: 1.8;
+    word-break: break-all;
+}
+
+.retro-ok-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    color: #ffffff;
+    background: transparent;
+    border: 2px solid #ffffff;
+    padding: 8px 32px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .retro-ok-btn:hover {
+        background-color: #ffffff;
+        color: #0000FF;
+    }
