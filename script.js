@@ -21,7 +21,7 @@ const fishes = [
         vx: 0.6, vy: 0.15,          // ★ 速度調慢（原本為 2.0 / 0.5）
         size: 120,                  // 金魚尺寸
         angle: 0,                   // 用於垂直方向的微幅上下波浪律動
-        url: '../naomiportfolio/game/blueday.html'        // 點擊跳轉的專案頁面
+        url: '../naomi.github.io/game/blueday.html'        // 點擊跳轉的專案頁面
     },
     {
         x: 600, y: 400,
