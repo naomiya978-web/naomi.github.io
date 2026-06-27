@@ -1,0 +1,78 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #050b14;
+}
+
+/* 半人頭背景 */
+.background-head {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1700px; /* 依你的圖片比例調整 */
+    height: 1160px;
+    background-image: url('images/openpage.png'); /* 放入你畫的人頭 */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+    z-index: 1; /* 在最底層 */
+}
+
+/* 動態畫布 */
+#fishCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* 在人頭之上 */
+    cursor: default; /* ★ 改為 default (普通箭頭)，不預設全螢幕小手 */
+}
+
+/* UI 按鈕層 */
+.ui-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3; /* 在最上層，確保點擊得到 */
+}
+
+#openBtn {
+    /* 1. 調整尺寸：設定相同的寬高使其成為正方形 (可以自由放大縮小這兩個數值) */
+    width: 200px;
+    height: 100px;
+    /* 2. 字體設定：套用像素字體，並調整字型大小 */
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.5rem; /* 像素字體通常偏大，1rem ~ 1.2rem 剛剛好 */
+    color: #fff;
+    /* 3. 外框與背景：取消圓角(改成0)，切換為純粹的正方形框 */
+    background: transparent;
+    border: 3px solid #fff; /* 稍微加粗外框，更有像素幾何感 */
+    border-radius: 0px; /* ★ 確保是正方形直角 */
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    /* 讓按鈕內的文字完美置中 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    /* 滑鼠懸停效果 */
+    #openBtn:hover {
+        background: #fff;
+        color: #050b14; /* 懸停時字體變暗底色 */
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+        transform: scale(1.08); /* 懸停時微幅放大 */
+    }

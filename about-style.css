@@ -1,0 +1,347 @@
+﻿/* ===================================================
+   📌 基礎背景與字體設定
+   =================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000; /* 第一層：全網頁純黑 */
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===================================================
+   📌 畫布與背景圖疊加層設定
+   =================================================== */
+#fishCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* 最底層的動畫 */
+    pointer-events: none; /* 讓滑鼠點擊可以穿透 */
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 第二層：鋪滿窗口的半透明 1920x1080 圖案 */
+    background: url('images/aboutme/ambg1.png') no-repeat center center;
+    background-size: cover;
+    opacity: 0.6 ; /* 這邊可以調整它的半透明度，0.5 代表 50% 透明 */
+    z-index: 2;
+    pointer-events: none; /* 讓滑鼠點擊穿透到上層組件 */
+}
+
+/* ===================================================
+   📌 第三層：置中經典藍色復古方塊 (完全依圖還原)
+   =================================================== */
+.about-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3; /* 保證在最上層 */
+    padding: 20px;
+}
+
+/* 名片主外框 */
+.profile-card {
+    width: 100%;
+    max-width: 550px; /* 方塊合適的寬度 */
+    background-color: #ffffff;
+    border: 4px solid #0000FF; /* 經典藍色雙線外框的內框 */
+    outline: 6px solid #FFFFFF; /* 3. 最外層的白色大外框 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 上半部：頭像 + 名字 */
+.card-top-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 30px;
+    gap: 25px;
+    border-bottom: 4px solid #0000FF; /* 中間藍色分隔線 */
+}
+
+/* 左側正方形頭像外框 */
+.avatar-box {
+    width: 120px;
+    height: 120px;
+    border: 4px solid #0000FF; /* 藍色正方形框 */
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    transition: transform 0.1s ease;
+    flex-shrink: 0;
+}
+
+    .avatar-box:hover {
+        transform: scale(1.02);
+    }
+
+    .avatar-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        image-rendering: pixelated; /* 如果是像素圖，可防模糊 */
+    }
+
+/* 右側名字排版 */
+.name-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.main-name {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.4rem;
+    color: #0000FF;
+    line-height: 1.2;
+}
+
+.sub-name {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1rem;
+    color: #0000FF;
+}
+
+/* 下半部：自我介紹區 */
+.card-bottom-section {
+    padding: 25px 30px;
+}
+
+.bio-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #0000FF;
+    line-height: 1.8;
+}
+
+/* ===================================================
+   5. 右側固定選單按鈕與側邊欄樣式 (結構保持不變)
+   =================================================== */
+.menu-toggle {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 32px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 999999 !important;
+}
+
+    .menu-toggle .bar {
+        width: 100%;
+        height: 4px;
+        background-color: #0000FF;
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+        background-color: #ffffff;
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+        background-color: #ffffff;
+    }
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999990 !important;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+    transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+    .sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.sidebar-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #0000FF;
+    padding: 80px 50px;
+    display: flex;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-overlay.open .sidebar-box {
+    transform: translateX(0);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.sidebar-link {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+    .sidebar-link:hover {
+        color: #ff3b30;
+        transform: translateX(10px);
+    }
+
+.sidebar-social-grid {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-btn {
+    width: 52px;
+    height: 52px;
+    background-color: #050b14;
+    border: 2px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+    .social-btn img {
+        width: 65%;
+        height: 65%;
+        object-fit: contain;
+    }
+
+    .social-btn:hover {
+        transform: scale(1.1);
+        border-color: #ff3b30;
+        background-color: #000000;
+    }
+
+.retro-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9999999 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+    .retro-modal-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.retro-window {
+    width: 350px;
+    background-color: #0000FF;
+    border: 3px solid #ffffff;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+}
+
+.retro-title-bar {
+    background-color: #ffffff;
+    color: #0000FF;
+    padding: 6px 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.retro-close-x {
+    cursor: pointer;
+    padding: 2px 6px;
+    font-weight: bold;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+    .retro-close-x:hover {
+        background-color: #ff3b30;
+        color: #ffffff;
+    }
+
+.retro-body {
+    padding: 35px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.retro-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #ffffff;
+    line-height: 1.8;
+    word-break: break-all;
+}
+
+.retro-ok-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    color: #ffffff;
+    background: transparent;
+    border: 2px solid #ffffff;
+    padding: 8px 32px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .retro-ok-btn:hover {
+        background-color: #ffffff;
+        color: #0000FF;
+    }

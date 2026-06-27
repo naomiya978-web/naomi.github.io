@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Naomi's World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="about-style.css">
+</head>
+<body>
+
+    <canvas id="fishCanvas"></canvas>
+
+    <div class="background-overlay"></div>
+
+    <main class="about-container">
+        <div class="profile-card">
+            <div class="card-top-section">
+                <div class="avatar-box" id="avatarBox">
+                    <img src="icon1.png" id="avatarImg" alt="Naomi's Icon">
+                </div>
+                <div class="name-box">
+                    <h1 class="main-name">Xiaoqing Chen</h1>
+                    <p class="sub-name">Naomi</p>
+                </div>
+            </div>
+            <div class="card-bottom-section">
+                <p class="bio-text">
+                    Hi! I'm Naomi. Digital artist. Passionate about games, manga, and animation. Thank you for spending a moment in my creative space.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <div class="menu-toggle" id="menuToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay">
+        <div class="sidebar-box">
+            <nav class="sidebar-nav">
+                <a href="main.html" class="sidebar-link">Home</a>
+                <a href="game.html" class="sidebar-link">Game</a>
+                <a href="animation.html" class="sidebar-link">Animation</a>
+                <a href="illustration.html" class="sidebar-link">Illustration</a>
+                <a href="others.html" class="sidebar-link">Others</a>
+                <a href="about.html" class="sidebar-link">About Me</a>
+                <span class="sidebar-link" id="contractTrigger">Contact</span>
+                <div class="sidebar-social-grid">
+                    <a href="https://www.instagram.com/naommii.0?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn">
+                        <img src="images/instagram-icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.pixiv.net/users/65923520" target="_blank" class="social-btn">
+                        <img src="images/pixiv-icon.png" alt="Pixiv">
+                    </a>
+                    <a href="https://youtube.com/@naomi-ya?si=92hBufzmrzh-5EYt" target="_blank" class="social-btn">
+                        <img src="images/youtube-icon.png" alt="Youtube">
+                    </a>
+                    <a href="https://space.bilibili.com/238136268/upload/video" target="_blank" class="social-btn">
+                        <img src="images/bilibili-icon.png" alt="BiliBili">
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="retro-modal-overlay" id="retroModal">
+        <div class="retro-window">
+            <div class="retro-title-bar">
+                <span class="retro-title-text">Contact</span>
+                <div class="retro-close-x" id="modalXClose">X</div>
+            </div>
+            <div class="retro-body">
+                <p class="retro-text">EMAIL:<br>naomiya978@gmail.com</p>
+                <button class="retro-ok-btn" id="modalOkClose">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            /* ==========================================
+               1. 側邊欄選單邏輯 (保持你原始的功能)
+               ========================================== */
+            const menuToggle = document.getElementById("menuToggle");
+            const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+            menuToggle.addEventListener("click", () => {
+                menuToggle.classList.toggle("active");
+                sidebarOverlay.classList.toggle("open");
+            });
+
+            sidebarOverlay.addEventListener("click", (e) => {
+                if (e.target === sidebarOverlay) {
+                    menuToggle.classList.remove("active");
+                    sidebarOverlay.classList.remove("open");
+                }
+            });
+
+            const contractTrigger = document.getElementById("contractTrigger");
+            const retroModal = document.getElementById("retroModal");
+            const modalXClose = document.getElementById("modalXClose");
+            const modalOkClose = document.getElementById("modalOkClose");
+
+            if (contractTrigger && retroModal) {
+                // 打開彈出視窗
+                contractTrigger.addEventListener("click", () => {
+                    retroModal.classList.add("show");
+                });
+
+                // 關閉彈出視窗的函式
+                const closeContactModal = () => {
+                    retroModal.classList.remove("show");
+                };
+
+                // 點擊 X 關閉視窗
+                if (modalXClose) modalXClose.addEventListener("click", closeContactModal);
+
+                // 【修正核心】點擊 Send 按鈕：打開系統郵件軟體 + 關閉視窗
+                if (modalOkClose) {
+                    modalOkClose.addEventListener("click", () => {
+                        // 觸發系統預設郵件客戶端，並自動帶入你的 Email
+                        window.location.href = "mailto:naomiya978@gmail.com?subject=Hello Naomi!";
+
+                        // 開啟後將彈出視窗關閉
+                        closeContactModal();
+                    });
+                }
+
+                // 點擊視窗外部空白處關閉
+                retroModal.addEventListener("click", (e) => {
+                    if (e.target === retroModal) {
+                        closeContactModal();
+                    }
+                });
+            }
+
+            /* ==========================================
+               2. 頭像隨機刷新與點擊切換邏輯
+               ========================================== */
+            const avatarIcons = ["images/aboutme/icon1.png", "images/aboutme/icon2.png", "images/aboutme/icon3.png"];
+            const avatarImg = document.getElementById("avatarImg");
+            const avatarBox = document.getElementById("avatarBox");
+
+            // 隨機選擇一個當作初始頭像索引
+            let currentIndex = Math.floor(Math.random() * avatarIcons.length);
+            avatarImg.src = avatarIcons[currentIndex];
+
+            // 點擊正方形頭像切換到下一個
+            avatarBox.addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % avatarIcons.length;
+                avatarImg.src = avatarIcons[currentIndex];
+            });
+
+
+            /* ==========================================
+               3. Canvas 10條魚反彈游動動畫
+               ========================================== */
+            const canvas = document.getElementById("fishCanvas");
+            const ctx = canvas.getContext("2d");
+
+            // 讓 Canvas 鋪滿視窗
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener("resize", resizeCanvas);
+
+            // 載入魚的貼圖
+            const fishImage = new Image();
+            fishImage.src = 'images/fish.png'; // 請確保檔案名稱正確
+
+            // 魚的物件建構子
+            class Fish {
+                constructor() {
+                    this.width = 100;  // 魚的顯示寬度，可依據你的 fish.png 大小微調
+                    this.height = 100; // 魚的顯示高度
+                    // 隨機初始位置，確保一開始不會卡在邊界外
+                    this.x = Math.random() * (canvas.width - this.width);
+                    this.y = Math.random() * (canvas.height - this.height);
+                    // 隨機速度 (X軸與Y軸)
+                    this.vx = (Math.random() - 0.5) * 2; // 數值代表速度快慢
+                    this.vy = (Math.random() - 0.5);
+
+                    // 避免跑出速度為 0 的死魚
+                    if (Math.abs(this.vx) < 0.5) this.vx = this.vx > 0 ? 0.8 : -0.8;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    // 左右邊界碰撞檢測與反轉
+                    if (this.x <= 0) {
+                        this.x = 0;
+                        this.vx *= -1; // 反向游
+                    } else if (this.x + this.width >= canvas.width) {
+                        this.x = canvas.width - this.width;
+                        this.vx *= -1; // 反向游
+                    }
+
+                    // 上下邊界碰撞檢測與反轉
+                    if (this.y <= 0) {
+                        this.y = 0;
+                        this.vy *= -1;
+                    } else if (this.y + this.height >= canvas.height) {
+                        this.y = canvas.height - this.height;
+                        this.vy *= -1;
+                    }
+                }
+
+                draw() {
+                    ctx.save();
+                    // 移動到魚的中心點以方便進行水平翻轉
+                    ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+
+                    // 根據游動方向 (vx) 來翻轉圖片貼圖
+                    // 如果 vx > 0 往右游，scale(1, 1) 正常；如果 vx < 0 往左游，scale(-1, 1) 水平翻轉
+                    if (this.vx < 0) {
+                        ctx.scale(-1, 1);
+                    }
+
+                    // 繪製魚 (將中心點對齊回原位)
+                    ctx.drawImage(fishImage, -this.width / 2, -this.height / 2, this.width, this.height);
+                    ctx.restore();
+                }
+            }
+
+            // 初始化 10 條魚
+            const fishArray = [];
+            for (let i = 0; i < 20; i++) {
+                fishArray.push(new Fish());
+            }
+
+            // 動態循環渲染
+            function animate() {
+                // 清除畫布（保持背景純黑）
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 更新並繪製每條魚
+                fishArray.forEach(fish => {
+                    fish.update();
+                    fish.draw();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            // 確保貼圖載入後開始執行魚群動畫
+            fishImage.onload = () => {
+                animate();
+            };
+            // 萬一瀏覽器有存取快取直接秒開
+            if (fishImage.complete) {
+                animate();
+            }
+        });
+    </script>
+</body>
+</html>

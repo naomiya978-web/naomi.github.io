@@ -1,0 +1,543 @@
+﻿/* ===================================================
+   📌 全域重設與基本樣式
+   =================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* ===================================================
+   📌 電線桿背景拼接效果
+   =================================================== */
+.others-container {
+    position: relative;
+    width: 100%;
+    min-height: 200vh;
+}
+
+.section-top {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: url('images/others/othersbg1.png') no-repeat center top;
+    background-size: cover;
+}
+
+.section-body {
+    width: 100%;
+    min-height: 230vh;
+    position: relative;
+    /* 核心修改在這裡 */
+    background-image: url('images/others/othersbg2.png');
+    background-repeat: repeat-y;
+    background-position: center top;
+    background-size: cover;
+    /* 加上這一行：這會讓背景「黏」在視窗上，不隨內容捲動 */
+    background-attachment: fixed;
+}
+
+.page-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2.5rem;
+    color: #000000;
+    letter-spacing: 2px;
+}
+
+.to-be-continued {
+    /* 定位設定 */
+    position: absolute; /* 若想隨網頁滑動固定在右下角用 fixed，若想出現在頁面最底端用 absolute */
+    bottom: 30px;
+    right: 30px;
+    /* 文字風格設定 */
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    color: #0000FF; /* 你的經典藍 */
+    /* 增加一點復古裝飾感 */
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #0000FF;
+    z-index: 999;
+    /* 讓它看起來像個像素視窗 */
+    box-shadow: 3px 3px 0px #cccccc;
+    pointer-events: none; /* 讓點擊穿透它，避免擋到其他操作 */
+}
+
+/* ===================================================
+   📌 復古 Windows 視窗組件
+   =================================================== */
+.retro-window {
+    position: absolute;
+    width: 320px;
+    background-color: #FFFFFF;
+    border: 3px solid #0000FF;
+    box-shadow: 5px 5px 0px 0px rgba(180, 180, 180, 0.8);
+    z-index: 10;
+}
+
+.window-titlebar {
+    background-color: #FFFFFF;
+    color: #0000FF;
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-bottom: 3px solid #0000FF;
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+    color: #0000FF;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.win-control-btn {
+    transition: opacity 0.1s ease;
+}
+
+.win-control-btn:hover {
+    opacity: 0.6;
+}
+
+.window-body {
+    padding: 8px;
+    background-color: #FFFFFF;
+}
+
+.thumb-link {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border: 2px solid #0000FF;
+    cursor: pointer;
+}
+
+.window-thumb {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.window-thumb:hover {
+    transform: scale(1.03);
+}
+
+/* ===================================================
+   📌 SVG 直線樣式與中央端點
+   =================================================== */
+.wires-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.blue-wire {
+    fill: none;
+    stroke: #0000FF;
+    stroke-width: 2px; /* 直線使用 2px ~ 2.5px 視覺效果最乾淨齊整 */
+    stroke-linecap: round;
+    opacity: 1;
+}
+
+/* 視窗內部的隱形對齊接點 */
+.wire-anchor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+/* 中央對應聚集點的方塊/圓點外觀（就如你給的範例圖那樣） */
+.hub-point {
+    position: fixed; /* 固定在畫面上隨 JS 動態變更坐標 */
+    width: 6px;
+    height: 6px;
+    background-color: #0000FF; /* 藍色像素風格端點，若不想顯示可設為 transparent */
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 6;
+}
+
+/* ===================================================
+   📌 作品詳情彈窗樣式 (白底純藍框、左右雙欄結構)
+   =================================================== */
+.detail-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9999999 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.detail-modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.detail-window {
+    position: relative;
+    /* 💡 1. 在這裡把寬度加大！例如從 760px 改到 960px 或 1020px */
+    width: 980px;
+    max-width: 95%;
+    background-color: #FFFFFF;
+    border: 3px solid #0000FF;
+    box-shadow: 10px 10px 0px 0px rgba(160, 160, 160, 0.9);
+    z-index: 10000001 !important;
+}
+
+.detail-layout {
+    display: flex;
+    gap: 32px; /* 💡 稍微拉開左右兩欄的間距 */
+    padding: 24px;
+    align-items: flex-start;
+}
+
+/* 💡 2. 限制左側圖片欄位的最大寬度，防止寬度變長後圖片肥大 */
+.detail-left-col {
+    flex: 0 0 380px; /* 固定圖片欄位寬度為 380px，不隨視窗變寬而無限放大 */
+    width: 100%;
+}
+
+.detail-img-wrapper {
+    width: 100%;
+    border: 2px solid #0000FF;
+    overflow: hidden;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center; /* 左右置中 */
+    align-items: center;
+}
+
+.detail-img {
+    width: 100%; /* 💡 預設 100% 撐滿左側欄。如果想變小，可以改 90% */
+    height: 100%; /* 💡 讓高度也撐滿外框 */
+    display: block;
+    /* 💡 關鍵屬性：控制影片在外框裡的縮放行為 */
+    object-fit: contain; /* 預設：保持完整影片比例，上下或左右可能留黑邊 */
+}
+
+/* 💡 3. 右側文字欄位會自動吞掉剩下變寬的所有空間 */
+.detail-right-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: stretch;
+    text-align: left;
+}
+
+.detail-text {
+    font-size: 0.95rem;
+    color: #000000;
+    line-height: 1.6;
+    margin-top: 25px;
+    word-break: break-word;
+}
+
+.detail-go-btn {
+    align-self: flex-start;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #0000FF;
+    background-color: #FFFFFF;
+    border: 2px solid #0000FF;
+    padding: 10px 24px;
+    text-decoration: none;
+    box-shadow: 4px 4px 0px #0000FF;
+    cursor: pointer;
+    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
+    margin-top: auto;
+    margin-bottom: 40px;
+}
+
+.detail-go-btn:hover {
+    background-color: #0000FF;
+    color: #FFFFFF;
+}
+
+.detail-go-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #0000FF;
+}
+
+.detail-subtitle {
+    font-family: 'Press Start 2P', monospace; /* 💡 使用你的復古像素字體 */
+    font-size: 2rem; /* 💡 調整字體大小 */
+    color: #0000FF; /* 💡 使用經典藍色 */
+    margin-top: 10px;
+    margin-bottom: 4px; /* 💡 讓它跟下方的 intro 文字保持 16px 的間距 */
+    text-transform: uppercase; /* 自動強制大寫 */
+}
+
+/* 把你寫好的樣式加進 CSS，並在底部補上一個 margin-bottom */
+.project-tag-box {
+    display: inline-block;
+    width: max-content;
+    margin-top: 20px;
+    background-color: #0000FF;
+    color: #FFFFFF;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    padding: 8px 16px;
+    border: 2px solid #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    /* 💡 建議補上這行，避免下方的 MORE INFO 按鈕跟它死貼在一起 */
+    margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+    .detail-layout {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .detail-right-col {
+        align-self: initial;
+    }
+    .detail-go-btn {
+        align-self: center;
+        margin-top: 10px;
+    }
+}
+
+/* ===================================================
+   📌 右側選單按鈕與側邊欄樣式 (保持原樣)
+   =================================================== */
+.menu-toggle {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 32px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 999999 !important;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 4px;
+    background-color: #0000FF;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+    background-color: #ffffff;
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+    background-color: #ffffff;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999990 !important;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+    transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+.sidebar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #0000FF;
+    padding: 80px 50px;
+    display: flex;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-overlay.open .sidebar-box {
+    transform: translateX(0);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.sidebar-link {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+.sidebar-link:hover {
+    color: #ff3b30;
+    transform: translateX(10px);
+}
+
+.sidebar-social-grid {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-btn {
+    width: 52px;
+    height: 52px;
+    background-color: #050b14;
+    border: 2px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.social-btn img {
+    width: 65%;
+    height: 65%;
+    object-fit: contain;
+}
+
+.social-btn:hover {
+    transform: scale(1.1);
+    border-color: #ff3b30;
+    background-color: #000000;
+}
+
+/* ===================================================
+   📌 原始 Contact 彈出視窗固定樣式
+   =================================================== */
+.retro-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9999999 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.retro-modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.retro-modal-overlay .retro-window {
+    width: 350px;
+    background-color: #0000FF;
+    border: 3px solid #ffffff;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+}
+
+.retro-title-bar {
+    background-color: #ffffff;
+    color: #0000FF;
+    padding: 6px 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.retro-close-x {
+    cursor: pointer;
+    padding: 2px 6px;
+    font-weight: bold;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.retro-close-x:hover {
+    background-color: #ff3b30;
+    color: #ffffff;
+}
+
+.retro-body {
+    padding: 35px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.retro-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #ffffff;
+    line-height: 1.8;
+    word-break: break-all;
+}
+
+.retro-ok-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    color: #ffffff;
+    background: transparent;
+    border: 2px solid #ffffff;
+    padding: 8px 32px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.retro-ok-btn:hover {
+    background-color: #ffffff;
+    color: #0000FF;
+}

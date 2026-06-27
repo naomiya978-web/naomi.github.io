@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Naomi's World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main-style.css">
+</head>
+<body>
+
+    <div class="menu-toggle" id="menuToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay">
+        <div class="sidebar-box">
+            <nav class="sidebar-nav">
+                <a href="main.html" class="sidebar-link">Home</a>
+                <a href="game.html" class="sidebar-link">Game</a>
+                <a href="animation.html" class="sidebar-link">Animation</a>
+                <a href="illustration.html" class="sidebar-link">Illustration</a>
+                <a href="others.html" class="sidebar-link">Others</a>
+                <a href="about.html" class="sidebar-link">About Me</a>
+
+                <span class="sidebar-link" id="contractTrigger">Contact</span>
+
+                <div class="sidebar-social-grid">
+                    <a href="https://www.instagram.com/naommii.0?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn">
+                        <img src="images/instagram-icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.pixiv.net/users/65923520" target="_blank" class="social-btn">
+                        <img src="images/pixiv-icon.png" alt="Pixiv">
+                    </a>
+                    <a href="https://youtube.com/@naomi-ya?si=92hBufzmrzh-5EYt" target="_blank" class="social-btn">
+                        <img src="images/youtube-icon.png" alt="Youtube">
+                    </a>
+                    <a href="https://space.bilibili.com/238136268/upload/video" target="_blank" class="social-btn">
+                        <img src="images/bilibili-icon.png" alt="BiliBili">
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="retro-modal-overlay" id="retroModal">
+        <div class="retro-window">
+            <div class="retro-title-bar">
+                <span class="retro-title-text">Contact</span>
+                <div class="retro-close-x" id="modalXClose">X</div>
+            </div>
+            <div class="retro-body">
+                <p class="retro-text">EMAIL:<br>naomiya978@gmail.com</p>
+                <button class="retro-ok-btn" id="modalOkClose">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="page1">
+        <div class="welcome1-text">WELCOME TO...</div>
+
+        <div class="welcome2-text">
+            <div class="text-bg-block"></div>
+            <span class="txt-red">NAOMI</span><a href="#page2" class="click-to-page2"><span class="txt-blue">'S WORLD</span></a>
+        </div>
+
+        <div class="video-container">
+            <video src="images/mainvideo.mov" autoplay loop muted playsinline disablePictureInPicture></video>
+        </div>
+
+        <div class="bottom-info-block"></div>
+
+        <div class="hello-line hello-1 opacity-100">hello ↓</div>
+        <div class="hello-line hello-2 opacity-60">hello ↓</div>
+        <div class="hello-line hello-3 opacity-30">hello ↓</div>
+
+        <canvas id="homeFishCanvas"></canvas>
+    </section>
+
+    <section id="page2">
+        <canvas id="networkCanvas"></canvas>
+
+        <div class="menu-container">
+            <a href="game.html" class="menu-btn">
+                <span class="btn-text">Game</span>
+            </a>
+            <a href="animation.html" class="menu-btn">
+                <span class="btn-text">Animation</span>
+            </a>
+            <a href="illustration.html" class="menu-btn">
+                <span class="btn-text">Illustration</span>
+            </a>
+            <a href="others.html" class="menu-btn">
+                <span class="btn-text">Others</span>
+            </a>
+            <a href="about.html" class="menu-btn">
+                <span class="btn-text">About Me</span>
+            </a>
+        </div>
+    </section>
+
+    <script src="main-script.js"></script>
+</body>
+</html>

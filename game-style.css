@@ -1,0 +1,310 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* 填滿畫面，不產生滾動條 */
+}
+
+/* ===================================================
+   遊戲主頁佈局容器
+   =================================================== */
+.game-page-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 10;
+}
+
+/* 1. 🛠️ 改為 Black Ops One、純黑色、放大版的大標題 */
+.game-main-title {
+    font-family: 'Black Ops One', system-ui, sans-serif;
+    font-size: 4.5rem; /* 字體再加大 */
+    color: #000000; /* 換成純黑色 */
+    letter-spacing: 6px;
+    padding: 4vh 0; /* 透過內邊距給予標題舒適的上下空間 */
+    text-align: center;
+    width: 100%;
+    z-index: 15;
+}
+
+/* 2 & 3. 🛠️ 垂直排列且佈滿剩餘畫面的容器 */
+.game-buttons-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* 寬度從左到右 100% 填滿 */
+    flex: 1; /* 自動填滿標題以外的所有剩餘垂直空間 */
+    gap: 0px; /* 核心：按鈕與按鈕之間完全沒有空隙 */
+}
+
+/* 3. 長條形按鈕設定 */
+.game-long-btn {
+    position: relative;
+    width: 100%;
+    flex: 1; /* 三個按鈕均分剩餘的所有畫面高度 */
+    background-color: #000000;
+    overflow: hidden;
+    text-decoration: none;
+    cursor: pointer;
+    /* 移除所有邊框、陰影與縮放效果 */
+    border: none;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    /* 按鈕內背景圖縮圖 */
+    .game-long-btn .btn-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        /* 4. 🛠️ 預設效果：藍色濾鏡 + 模糊（Blur）效果 */
+        filter: saturate(0.5) hue-rotate(190deg) brightness(0.5) blur(6px);
+        transform: scale(1.02); /* 微調放大以防止模糊時邊緣露白 */
+        transition: filter 0.4s ease;
+    }
+
+    /* 4. 🛠️ 當鼠標滑到按鈕上時，取消所有特效 (無特殊放大或紅框效應) */
+    .game-long-btn:hover .btn-img {
+        filter: none; /* 清除藍色與模糊，恢復正常顏色與清晰度 */
+    }
+
+/* 4. 🛠️ 文字顏色控制：原本是藍色 */
+.btn-text-center {
+    position: relative;
+    z-index: 2;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.6rem;
+    color: #0000FF; /* 預設為藍色文字 */
+    text-shadow: 2px 2px 0px #000000; /* 加上黑色像素陰影襯底，確保清晰 */
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+/* 4. 🛠️ 鼠標滑到時，文字顏色變成紅色 */
+.game-long-btn:hover .btn-text-center {
+    color: #ff3b30; /* 滑鼠移入變紅色 */
+}
+
+/* ===================================================
+   5. 右側固定選單按鈕與側邊欄樣式 (結構保持不變)
+   =================================================== */
+.menu-toggle {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 32px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 999999 !important;
+}
+
+    .menu-toggle .bar {
+        width: 100%;
+        height: 4px;
+        background-color: #0000FF;
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+        background-color: #ffffff;
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+        background-color: #ffffff;
+    }
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999990 !important;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+    transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+    .sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.sidebar-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #0000FF;
+    padding: 80px 50px;
+    display: flex;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-overlay.open .sidebar-box {
+    transform: translateX(0);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.sidebar-link {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+    .sidebar-link:hover {
+        color: #ff3b30;
+        transform: translateX(10px);
+    }
+
+.sidebar-social-grid {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-btn {
+    width: 52px;
+    height: 52px;
+    background-color: #050b14;
+    border: 2px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+    .social-btn img {
+        width: 65%;
+        height: 65%;
+        object-fit: contain;
+    }
+
+    .social-btn:hover {
+        transform: scale(1.1);
+        border-color: #ff3b30;
+        background-color: #000000;
+    }
+
+.retro-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9999999 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+    .retro-modal-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.retro-window {
+    width: 350px;
+    background-color: #0000FF;
+    border: 3px solid #ffffff;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+}
+
+.retro-title-bar {
+    background-color: #ffffff;
+    color: #0000FF;
+    padding: 6px 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.retro-close-x {
+    cursor: pointer;
+    padding: 2px 6px;
+    font-weight: bold;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+    .retro-close-x:hover {
+        background-color: #ff3b30;
+        color: #ffffff;
+    }
+
+.retro-body {
+    padding: 35px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.retro-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #ffffff;
+    line-height: 1.8;
+    word-break: break-all;
+}
+
+.retro-ok-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    color: #ffffff;
+    background: transparent;
+    border: 2px solid #ffffff;
+    padding: 8px 32px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .retro-ok-btn:hover {
+        background-color: #ffffff;
+        color: #0000FF;
+    }

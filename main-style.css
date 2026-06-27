@@ -1,0 +1,452 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* 💡 核心：確保點擊 #page2 錨點時是流暢平滑滾動，而非瞬間跳過去 */
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===================================================
+   右側固定選單按鈕（等比例縮小精緻版）
+   =================================================== */
+.menu-toggle {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 32px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 999;
+}
+
+    .menu-toggle .bar {
+        width: 100%;
+        height: 4px;
+        background-color: #0000FF;
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+        background-color: #ffffff;
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+        background-color: #ffffff;
+    }
+
+/* 側邊欄全螢幕模糊遮罩 */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(0px);
+    transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+    .sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+        backdrop-filter: blur(12px);
+    }
+
+.sidebar-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #0000FF;
+    padding: 80px 50px; /* 微調內襯，為下方正方形按鈕留出舒適空間 */
+    display: flex;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-overlay.open .sidebar-box {
+    transform: translateX(0);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.sidebar-link {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer; /* 讓 Contract 呈現可點擊手勢 */
+}
+
+    .sidebar-link:hover {
+        color: #ff3b30;
+        transform: translateX(10px);
+    }
+
+/* 🛠️ 新增：所有字下方的 4 個正方形按鈕排列排版 */
+.sidebar-social-grid {
+    display: flex;
+    gap: 15px; /* 按鈕間距 */
+    margin-top: 15px; /* 與上方 Contract 文字的間距 */
+}
+
+.social-btn {
+    width: 52px; /* 正方形寬度 */
+    height: 52px; /* 正方形高度 */
+    background-color: #050b14; /* 預設深色背景 */
+    border: 2px solid #ffffff; /* 經典像素白框 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+    .social-btn img {
+        width: 65%; /* 讓圖標縮放適中 */
+        height: 65%;
+        object-fit: contain;
+    }
+
+    /* 正方形按鈕 Hover 效果 */
+    .social-btn:hover {
+        transform: scale(1.1);
+        border-color: #ff3b30; /* 邊框變紅色 */
+        background-color: #000000; /* 背景變黑 */
+    }
+
+/* ===================================================
+   🛠️ 新增：復古微機系統風藍色彈窗（Modal）樣式
+   =================================================== */
+.retro-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* 暗化背後的網頁 */
+    z-index: 1000; /* 確保在最上層，蓋住側邊欄 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 預設隱藏 */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+    /* 顯示彈窗 */
+    .retro-modal-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+/* 視窗主體：重現白色雙線邊框與硬黑陰影 */
+.retro-window {
+    width: 350px;
+    background-color: #0000FF; /* ★ 成功將塗黑部分轉換為純藍色 */
+    border: 3px solid #ffffff; /* 像素白線邊框 */
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7); /* 硬實的復古黑色陰影 */
+}
+
+/* 頂部白色標題列 */
+.retro-title-bar {
+    background-color: #ffffff;
+    color: #0000FF;
+    padding: 6px 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 右上角 X 關閉鍵 */
+.retro-close-x {
+    cursor: pointer;
+    padding: 2px 6px;
+    font-weight: bold;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+    .retro-close-x:hover {
+        background-color: #ff3b30;
+        color: #ffffff;
+    }
+
+/* 彈窗內容區域 */
+.retro-body {
+    padding: 35px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+/* 藍色背景內部的白色像素字體 */
+.retro-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #ffffff;
+    line-height: 1.8;
+    word-break: break-all;
+}
+
+/* 還原參考圖的像素風 OK 按鈕 */
+.retro-ok-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    color: #ffffff;
+    background: transparent;
+    border: 2px solid #ffffff;
+    padding: 8px 32px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .retro-ok-btn:hover {
+        background-color: #ffffff;
+        color: #0000FF;
+    }
+
+/* ===================================================
+   第一板塊專屬
+   =================================================== */
+#page1 {
+    background: transparent;
+}
+
+.welcome1-text {
+    position: absolute;
+    top: 70px;
+    left: 100px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 3rem;
+    color: #ff3b30;
+    letter-spacing: 2px;
+    z-index: 10;
+    text-transform: lowercase;
+}
+
+.welcome2-text {
+    position: absolute;
+    top: 180px;
+    left: 200px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    z-index: 10;
+}
+
+    .welcome2-text .txt-red {
+        color: #0000FF;
+    }
+
+    .welcome2-text .txt-blue {
+        color: #ff3b30;
+    }
+
+.click-to-page2 {
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+    .click-to-page2:hover {
+        transform: scale(1.05);
+    }
+
+        .click-to-page2:hover .txt-blue {
+            color: #ff3b30;
+        }
+
+.welcome2-text .text-bg-block {
+    position: absolute;
+    top: -10px;
+    left: -50px;
+    width: 300px;
+    height: 80px;
+    background-color: #000000;
+    z-index: -1;
+}
+
+.video-container {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 7;
+    width: 560px;
+    height: 440px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background-color: #000;
+}
+
+    .video-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.bottom-info-block {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    transform: translateX(-50%);
+    width: 420px;
+    height: 200px;
+    background-color: #000000;
+    z-index: 6;
+}
+
+.hello-line {
+    position: absolute;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-transform: lowercase;
+    z-index: 6;
+}
+
+.hello-1 {
+    top: 75%;
+    left: 30%;
+}
+
+.hello-2 {
+    top: 80%;
+    left: 30%;
+}
+
+.hello-3 {
+    top: 85%;
+    left: 30%;
+}
+
+.opacity-100 {
+    color: rgba(0, 0, 255, 1.0);
+}
+
+.opacity-60 {
+    color: rgba(0, 0, 255, 0.6);
+}
+
+.opacity-30 {
+    color: rgba(0, 0, 255, 0.3);
+}
+
+#homeFishCanvas {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 300px;
+    z-index: 2;
+    background: transparent;
+}
+
+/* ===================================================
+   第二板塊專屬 (保持不變)
+   =================================================== */
+#page2 {
+    background-image: url('images/mainbg.PNG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#networkCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.menu-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    z-index: 2;
+}
+
+.menu-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 3px solid #ff3b30;
+    width: 320px;
+    height: 70px;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease, border-color 0.2s ease;
+}
+
+    .menu-btn .btn-text {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 1.1rem;
+        color: #ff3b30;
+        letter-spacing: 1px;
+        white-space: nowrap;
+        transition: color 0.2s ease;
+    }
+
+    .menu-btn:hover {
+        transform: scale(1.15);
+        background-color: #0000FF;
+        border-color: #0000FF;
+    }
+
+        .menu-btn:hover .btn-text {
+            color: #ffffff;
+        }
