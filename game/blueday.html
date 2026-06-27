@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 01 - Naomi's World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../game/gameproject-style1.css">
+</head>
+<body>
+
+    <main class="project-container">
+
+        <section class="project-section full-page-intro">
+            <div class="intro-content-wrapper">
+                <div class="intro-left">
+                    <div class="project-img-box-1">
+                        <img src="../images/game1-thumb.png" alt="Project Screenshot 1" class="project-img">
+                    </div>
+                </div>
+                <div class="intro-right">
+                    <h1 class="project-title">Blue Day</h1>
+                    <div class="safe-zone-content">
+                        <div class="introduction-text">
+                            <p>Iris is a grave keeper and carry out her duties in a remote town. As time progressed, mysterious strangers of unknown origin and a series of supernatural phenomena followed in quick succession. The intentionally buried memories resurfaced.</p>
+                        </div>
+
+                        <div class="project-tag-box">
+                            Unity
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-bg-decor">
+                <img src="../images/game1/game1bg1.png" alt="Background Decoration">
+            </div>
+        </section>
+
+
+        <section class="project-section full-page-screenshots">
+            <div class="carousel-container">
+                <h2 class="section-common-title"></h2>
+
+                <div class="carousel-slider">
+                    <div class="carousel-card active" data-index="0">
+                        <img src="../images/game1/screenshot1.png" alt="Screenshot 1">
+                        <div class="carousel-arrow arrow-left"></div>
+                        <div class="carousel-arrow arrow-right"></div>
+                    </div>
+                    <div class="carousel-card next" data-index="1">
+                        <img src="../images/game1/screenshot2.png" alt="Screenshot 2">
+                        <div class="carousel-arrow arrow-left"></div>
+                        <div class="carousel-arrow arrow-right"></div>
+                    </div>
+                    <div class="carousel-card hidden-right" data-index="2">
+                        <img src="../images/game1/screenshot3.png" alt="Screenshot 3">
+                        <div class="carousel-arrow arrow-left"></div>
+                        <div class="carousel-arrow arrow-right"></div>
+                    </div>
+                    <div class="carousel-card hidden-left" data-index="3">
+                        <img src="../images/game1/screenshot4.png" alt="Screenshot 4">
+                        <div class="carousel-arrow arrow-left"></div>
+                        <div class="carousel-arrow arrow-right"></div>
+                    </div>
+                    <div class="carousel-card prev" data-index="4">
+                        <img src="../images/game1/screenshot5.png" alt="Screenshot 5">
+                        <div class="carousel-arrow arrow-left"></div>
+                        <div class="carousel-arrow arrow-right"></div>
+                    </div>
+                </div>
+
+                <div class="carousel-dots-indicator">
+                    <div class="dot-icon active" data-target="0">
+                        <img src="../images/game1/icon1.png" class="icon-active" alt="Active Icon">
+                        <img src="../images/game1/icon2.png" class="icon-normal" alt="Normal Icon">
+                    </div>
+                    <div class="dot-icon" data-target="1">
+                        <img src="../images/game1/icon1.png" class="icon-active" alt="Active Icon">
+                        <img src="../images/game1/icon2.png" class="icon-normal" alt="Normal Icon">
+                    </div>
+                    <div class="dot-icon" data-target="2">
+                        <img src="../images/game1/icon1.png" class="icon-active" alt="Active Icon">
+                        <img src="../images/game1/icon2.png" class="icon-normal" alt="Normal Icon">
+                    </div>
+                    <div class="dot-icon" data-target="3">
+                        <img src="../images/game1/icon1.png" class="icon-active" alt="Active Icon">
+                        <img src="../images/game1/icon2.png" class="icon-normal" alt="Normal Icon">
+                    </div>
+                    <div class="dot-icon" data-target="4">
+                        <img src="../images/game1/icon1.png" class="icon-active" alt="Active Icon">
+                        <img src="../images/game1/icon2.png" class="icon-normal" alt="Normal Icon">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="project-section full-page-characters">
+            <div class="characters-container">
+
+                <div class="char-avatar-menu">
+                    <div class="avatar-item active" data-char="iris">
+                        <img src="../images/game1/iris-avatar.png" alt="Iris Avatar">
+                    </div>
+                    <div class="avatar-item" data-char="john">
+                        <img src="../images/game1/john-avatar.png" alt="John Avatar">
+                    </div>
+                    <div class="avatar-item" data-char="mother">
+                        <img src="../images/game1/mother-avatar.png" alt="Mother Avatar">
+                    </div>
+                    <div class="avatar-item" data-char="father">
+                        <img src="../images/game1/father-avatar.png" alt="Father Avatar">
+                    </div>
+                </div>
+
+                <div class="char-display-wrapper">
+
+                    <div class="char-panel active" id="panel-iris">
+                        <div class="char-center-lipic">
+                            <img src="../images/game1/iris-full.PNG" alt="Iris Full Body" class="lipic-img">
+                        </div>
+                        <div class="char-right-info">
+                            <div class="char-info-window">
+                                <div class="char-window-titlebar">
+                                    <span class="char-window-title">CHARACTER</span>
+                                    <div class="char-window-controls">
+                                        <div class="win-btn">_</div>
+                                        <div class="win-btn">[]</div>
+                                        <div class="win-btn">X</div>
+                                    </div>
+                                </div>
+                                <div class="char-window-body">
+                                    <h3 class="char-name">Iris</h3>
+                                    <p class="char-desc-text">She is a newly appointed gravekeeper in a remote town, dutifully carrying out her responsibilities each day. However, as her memories begin to resurface, supernatural events and mysterious strangers shatter her once peaceful life.</p>
+                                    <div class="char-expressions-grid">
+                                        <div class="exp-box"><img src="../images/game1/iris-exp1.png" alt="Iris Exp 1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="char-panel" id="panel-john">
+                        <div class="char-center-lipic">
+                            <img src="../images/game1/john-full.png" alt="John Full Body" class="lipic-img">
+                        </div>
+                        <div class="char-right-info">
+                            <div class="char-info-window">
+                                <div class="char-window-titlebar">
+                                    <span class="char-window-title">CHARACTER</span>
+                                    <div class="char-window-controls">
+                                        <div class="win-btn">_</div>
+                                        <div class="win-btn">[]</div>
+                                        <div class="win-btn">X</div>
+                                    </div>
+                                </div>
+                                <div class="char-window-body">
+                                    <h3 class="char-name">John Joe</h3>
+                                    <p class="char-desc-text">A mysterious man in the town, his identity concealed.</p>
+                                    <div class="char-expressions-grid">
+                                        <div class="exp-box"><img src="../images/game1/john-exp1.png" alt="John Exp 1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="char-panel" id="panel-mother">
+                        <div class="char-center-lipic">
+                            <img src="../images/game1/mother-full.png" alt="Mother Full Body" class="lipic-img">
+                        </div>
+                        <div class="char-right-info">
+                            <div class="char-info-window">
+                                <div class="char-window-titlebar">
+                                    <span class="char-window-title">CHARACTER</span>
+                                    <div class="char-window-controls">
+                                        <div class="win-btn">_</div>
+                                        <div class="win-btn">[]</div>
+                                        <div class="win-btn">X</div>
+                                    </div>
+                                </div>
+                                <div class="char-window-body">
+                                    <h3 class="char-name">Mother?</h3>
+                                    <p class="char-desc-text">Gentle, yet carrying a suffocating sense of oppression.</p>
+                                    <div class="char-expressions-grid">
+                                        <div class="exp-box"><img src="../images/game1/mother-exp1.png" alt="Mother Exp 1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="char-panel" id="panel-father">
+                        <div class="char-center-lipic">
+                            <img src="../images/game1/father-full.png" alt="Father Full Body" class="lipic-img">
+                        </div>
+                        <div class="char-right-info">
+                            <div class="char-info-window">
+                                <div class="char-window-titlebar">
+                                    <span class="char-window-title">CHARACTER</span>
+                                    <div class="char-window-controls">
+                                        <div class="win-btn">_</div>
+                                        <div class="win-btn">[]</div>
+                                        <div class="win-btn">X</div>
+                                    </div>
+                                </div>
+                                <div class="char-window-body">
+                                    <h3 class="char-name">Father?</h3>
+                                    <p class="char-desc-text">A grotesque, twisted mass of flesh, its many hands clawing at Iris, trying to tear her apart.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="bottom-bg-decor2">
+                <img src="../images/game1/game1bg3.png" alt="Background Decoration">
+            </div>
+        </section>
+
+
+        <section class="project-section full-page-video">
+            <div class="video-content-wrapper">
+                <div class="video-local-wrapper">
+                    <video controls preload="metadata" playsinline class="project-local-video">
+                        <source src="../images/game1/BlueDay.mp4" type="video/mp4">
+                        您的瀏覽器不支援播放此影片。 Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-section full-page-website">
+            <div class="web-window-container">
+                <div class="retro-web-window">
+                    <div class="web-window-titlebar">
+                        <span class="web-window-title">Game Development Blog</span>
+                        <div class="web-window-controls">
+                            <div class="web-win-btn">_</div>
+                            <div class="web-win-btn">[]</div>
+                            <div class="web-win-btn">X</div>
+                        </div>
+                    </div>
+                    <div class="web-window-body">
+                        <h3 class="web-window-heading">Visit My Blog</h3>
+                        <p class="web-window-text">Click the button below to explore more contents and updates about Blue Day.</p>
+                        <a href="https://teriri62.wixsite.com/blue-day-game-develo" target="_blank" class="web-redirect-btn">GO TO WEBSITE</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="menu-toggle" id="menuToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay">
+        <div class="sidebar-box">
+            <nav class="sidebar-nav">
+                <a href="../main.html" class="sidebar-link">Home</a>
+                <a href="../game.html" class="sidebar-link">Game</a>
+                <a href="../animation.html" class="sidebar-link">Animation</a>
+                <a href="../illustration.html" class="sidebar-link">Illustration</a>
+                <a href="../others.html" class="sidebar-link">Others</a>
+                <a href="../about.html" class="sidebar-link">About Me</a>
+                <span class="sidebar-link" id="contractTrigger">Contact</span>
+                <div class="sidebar-social-grid">
+                    <a href="https://www.instagram.com/naommii.0?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn">
+                        <img src="../images/instagram-icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.pixiv.net/users/65923520" target="_blank" class="social-btn">
+                        <img src="../images/pixiv-icon.png" alt="Pixiv">
+                    </a>
+                    <a href="https://youtube.com/@naomi-ya?si=92hBufzmrzh-5EYt" target="_blank" class="social-btn">
+                        <img src="../images/youtube-icon.png" alt="Youtube">
+                    </a>
+                    <a href="https://space.bilibili.com/238136268/upload/video" target="_blank" class="social-btn">
+                        <img src="../images/bilibili-icon.png" alt="BiliBili">
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="retro-modal-overlay" id="retroModal">
+        <div class="retro-window">
+            <div class="retro-title-bar">
+                <span class="retro-title-text">Contact</span>
+                <div class="retro-close-x" id="modalXClose">X</div>
+            </div>
+            <div class="retro-body">
+                <p class="retro-text">EMAIL:<br>naomiya978@gmail.com</p>
+                <button class="retro-ok-btn" id="modalOkClose">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            /* === 輪播圖邏輯 === */
+            const cards = document.querySelectorAll(".carousel-card");
+            const dots = document.querySelectorAll(".dot-icon");
+            let currentIndex = 0;
+            const totalCards = cards.length;
+
+            function updateCarousel(targetIndex) {
+                currentIndex = (targetIndex + totalCards) % totalCards;
+                cards.forEach((card, i) => {
+                    card.className = "carousel-card";
+                    let diff = i - currentIndex;
+                    if (diff < -2) diff += totalCards;
+                    if (diff > 2) diff -= totalCards;
+
+                    if (diff === 0) card.classList.add("active");
+                    else if (diff === 1 || diff === -(totalCards - 1)) card.classList.add("next");
+                    else if (diff === -1 || diff === (totalCards - 1)) card.classList.add("prev");
+                    else if (diff > 1) card.classList.add("hidden-right");
+                    else if (diff < -1) card.classList.add("hidden-left");
+                });
+                dots.forEach((dot, idx) => {
+                    if (idx === currentIndex) dot.classList.add("active");
+                    else dot.classList.remove("active");
+                });
+            }
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+                    const index = parseInt(card.getAttribute("data-index"));
+                    if (card.classList.contains("next") || card.classList.contains("prev")) updateCarousel(index);
+                });
+            });
+            dots.forEach(dot => {
+                dot.addEventListener("click", () => {
+                    updateCarousel(parseInt(dot.getAttribute("data-target")));
+                });
+            });
+            updateCarousel(0);
+
+            /* === 🛠️ 角色詳情切換邏輯 === */
+            const avatarItems = document.querySelectorAll(".avatar-item");
+            const charPanels = document.querySelectorAll(".char-panel");
+
+            avatarItems.forEach(item => {
+                item.addEventListener("click", () => {
+                    // 1. 切換頭像選中狀態
+                    avatarItems.forEach(avatar => avatar.classList.remove("active"));
+                    item.classList.add("active");
+
+                    // 2. 獲取選中角色名稱並顯示對應面板
+                    const targetChar = item.getAttribute("data-char");
+                    charPanels.forEach(panel => {
+                        panel.classList.remove("active");
+                        if (panel.id === `panel-${targetChar}`) {
+                            panel.classList.add("active");
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script src="../main-script.js"></script>
+</body>
+</html>
