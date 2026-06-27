@@ -29,7 +29,7 @@ const fishes = [
         vx: -0.5, vy: -0.1,         // ★ 速度調慢（原本為 -1.8 / -0.4）
         size: 110,                  // 金魚尺寸
         angle: Math.PI / 2,
-        url: '../naomiportfolio/game/flymetothemoon.html'
+        url: '../naomi.github.io/game/flymetothemoon.html'
     },
     {
         x: 300, y: 400,
@@ -37,7 +37,7 @@ const fishes = [
         vx: -0.5, vy: -0.15,         // ★ 速度調慢（原本為 -1.8 / -0.4）
         size: 110,                  // 金魚尺寸
         angle: 0,
-        url: '../naomiportfolio/game/youknowtomuch.html'
+        url: '../naomi.github.io/game/youknowtomuch.html'
     },
     {
         x: 1000, y: 600,
@@ -45,7 +45,7 @@ const fishes = [
         vx: -0.5, vy: -0.1,         // ★ 速度調慢（原本為 -1.8 / -0.4）
         size: 110,                  // 金魚尺寸
         angle: Math.PI / 2,
-        url: '../naomiportfolio/animation/hypothermia.html'
+        url: '../naomi.github.io/animation/hypothermia.html'
     },
     {
         x: 1500, y: 300,
@@ -53,7 +53,7 @@ const fishes = [
         vx: -0.8, vy: -0.1,         // ★ 速度調慢（原本為 -1.8 / -0.4）
         size: 110,                  // 金魚尺寸
         angle: Math.PI / 2,
-        url: '../naomiportfolio/animation/fused.html'
+        url: '../naomi.github.io/animation/fused.html'
     },
     {
         x: 1200, y: 150,
@@ -61,7 +61,7 @@ const fishes = [
         vx: -0.8, vy: -0.4,         // ★ 速度調慢（原本為 -1.8 / -0.4）
         size: 110,                  // 金魚尺寸
         angle: Math.PI / 2,
-        url: '../naomiportfolio/animation/animationproject.html'
+        url: '../naomi.github.io/animation/animationproject.html'
     },
     {
         x: 500, y: 100,
@@ -85,7 +85,7 @@ const fishes = [
         vx: -0.8, vy: -0.4,         // ★ 速度調慢（原本為 -1.8 / -0.4）
         size: 110,                  // 金魚尺寸
         angle: Math.PI / 2,
-        url: '../naomiportfolio/others/plumblossomtrial.html'
+        url: '../naomi.github.io/others/plumblossomtrial.html'
     },
     {
         x: 700, y: 400,
@@ -93,7 +93,7 @@ const fishes = [
         vx: -0.9, vy: -0.3,         // ★ 速度調慢（原本為 -1.8 / -0.4）
         size: 110,                  // 金魚尺寸
         angle: Math.PI / 2,
-        url: '../naomiportfolio/others/warmbreathdesign.html'
+        url: '../naomi.github.io/others/warmbreathdesign.html'
     }
 ];
 
