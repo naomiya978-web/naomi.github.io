@@ -390,7 +390,7 @@ section {
    第二板塊專屬 (保持不變)
    =================================================== */
 #page2 {
-    background-image: url('images/mainbg.PNG');
+    background-image: url('images/mainbg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
