@@ -243,13 +243,15 @@ autoScaleWrapper();
 
     if (!isMobile) return; // ★ 如果是電腦桌機版，直接退出，100% 不受影響！
 
-    // 備份原本以 1920x1080 為基準的原始座標與尺寸
+   // 備份原本以 1920x1080 為基準的原始座標、尺寸與速度
     const originalFishesData = fishes.map(f => ({
         xRatio: f.x / 1920,
         yRatio: f.y / 1080,
         anchorXRatio: f.anchorX / 1920,
         anchorYRatio: f.anchorY / 1080,
-        size: f.size
+        size: f.size,
+        vx: f.vx,  // 💡 備份原始 X 軸速度
+        vy: f.vy   // 💡 備份原始 Y 軸速度
     }));
 
     // 手機端動態重新計算金魚與紅點座標
@@ -257,10 +259,11 @@ autoScaleWrapper();
         const screenW = window.innerWidth;
         const screenH = window.innerHeight;
 
-        // 🎯【微調參數】請根據視覺效果調整以下三個數值：
-        const offsetX = screenW * 0.12;   // 往右偏移量 (視窗寬度的 12%，越大越靠右)
-        const offsetY = screenH * 0.08;   // 往下偏移量 (視窗高度的 8%，越大越靠下)
-        const fishScale = 1.15;           // 魚的放大倍率 (1.45 代表比原本大 45%)
+        // 🎯【微調參數】
+        const offsetX = screenW * 0.12;   // 往右偏移量
+        const offsetY = screenH * 0.08;   // 往下偏移量
+        const fishScale = 1.1;           // 魚的放大倍率
+        const speedScale = 1.8;           // 💡【新增】手機版速度倍率 (1.8 代表速度變快 1.8 倍)
 
         fishes.forEach((fish, i) => {
             const data = originalFishesData[i];
@@ -268,11 +271,15 @@ autoScaleWrapper();
             // 1. 金魚放大
             fish.size = data.size * fishScale;
 
-            // 2. 金魚初始位置微調（跟著往右下方偏移，進入紅色腦部線條區域）
+            // 2. 💡【新增】手機版金魚速度加速
+            fish.vx = data.vx * speedScale;
+            fish.vy = data.vy * speedScale;
+
+            // 3. 金魚初始位置微調
             fish.x = (screenW * data.xRatio) + offsetX;
             fish.y = (screenH * data.yRatio) + offsetY;
 
-            // 3. 紅點（固定錨點）往下往右偏移
+            // 4. 紅點（固定錨點）往下往右偏移
             fish.anchorX = (screenW * data.anchorXRatio) + offsetX;
             fish.anchorY = (screenH * data.anchorYRatio) + offsetY;
         });
