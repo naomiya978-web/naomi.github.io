@@ -233,3 +233,65 @@ function autoScaleWrapper() {
 window.addEventListener('resize', autoScaleWrapper);
 window.addEventListener('DOMContentLoaded', autoScaleWrapper);
 autoScaleWrapper();
+
+// ==========================================
+// 新增：手機版專用自動縮放適配（完全不影響桌機網頁版）
+// ==========================================
+(function initMobileAdaptation() {
+    // 判斷是否為手機/行動裝置
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+
+    if (!isMobile) return; // ★ 如果是電腦桌機版，直接退出，完全不影響原網頁版！
+
+    // 備份原本以 1920x1080 為基準的原始座標
+    const originalFishesData = fishes.map(f => ({
+        xRatio: f.x / 1920,
+        yRatio: f.y / 1080,
+        anchorXRatio: f.anchorX / 1920,
+        anchorYRatio: f.anchorY / 1080,
+        sizeRatio: f.size / 1920
+    }));
+
+    // 手機端動態重新計算金魚與紅點座標，確保 100% 留在手機螢幕內
+    function adaptFishesForMobile() {
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+
+        fishes.forEach((fish, i) => {
+            const data = originalFishesData[i];
+            
+            // 按手機螢幕比例重新對齊座標
+            fish.x = screenW * data.xRatio;
+            fish.y = screenH * data.yRatio;
+            fish.anchorX = screenW * data.anchorXRatio;
+            fish.anchorY = screenH * data.anchorYRatio;
+            
+            // 適度縮小手機上的金魚尺寸
+            fish.size = Math.max(50, screenW * data.sizeRatio * 1.5);
+        });
+    }
+
+    // 手機端觸控支援 (Touch Events)
+    canvas.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 0) {
+            const touch = event.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const touchX = touch.clientX - rect.left;
+            const touchY = touch.clientY - rect.top;
+
+            for (let i = 0; i < fishes.length; i++) {
+                const fish = fishes[i];
+                const distance = Math.sqrt((touchX - fish.x) ** 2 + (touchY - fish.y) ** 2);
+
+                if (distance < fish.size / 2) {
+                    window.location.href = fish.url;
+                    break;
+                }
+            }
+        }
+    }, { passive: true });
+
+    // 監聽手機旋轉與尺寸改變
+    window.addEventListener('resize', adaptFishesForMobile);
+    adaptFishesForMobile(); // 初始化立刻執行手機座標適配
+})();
