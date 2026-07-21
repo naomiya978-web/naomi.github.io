@@ -235,39 +235,46 @@ window.addEventListener('DOMContentLoaded', autoScaleWrapper);
 autoScaleWrapper();
 
 // ==========================================
-// 新增：手機版專用自動縮放適配（完全不影響桌機網頁版）
+// 📱 手機版專用：座標偏移 & 金魚尺寸放大（完全不影響電腦網頁版）
 // ==========================================
 (function initMobileAdaptation() {
-    // 判斷是否為手機/行動裝置
+    // 判斷是否為手機/行動裝置 (寬度 <= 768px 或直向螢幕)
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
 
-    if (!isMobile) return; // ★ 如果是電腦桌機版，直接退出，完全不影響原網頁版！
+    if (!isMobile) return; // ★ 如果是電腦桌機版，直接退出，100% 不受影響！
 
-    // 備份原本以 1920x1080 為基準的原始座標
+    // 備份原本以 1920x1080 為基準的原始座標與尺寸
     const originalFishesData = fishes.map(f => ({
         xRatio: f.x / 1920,
         yRatio: f.y / 1080,
         anchorXRatio: f.anchorX / 1920,
         anchorYRatio: f.anchorY / 1080,
-        sizeRatio: f.size / 1920
+        size: f.size
     }));
 
-    // 手機端動態重新計算金魚與紅點座標，確保 100% 留在手機螢幕內
+    // 手機端動態重新計算金魚與紅點座標
     function adaptFishesForMobile() {
         const screenW = window.innerWidth;
         const screenH = window.innerHeight;
 
+        // 🎯【微調參數】請根據視覺效果調整以下三個數值：
+        const offsetX = screenW * 0.12;   // 往右偏移量 (視窗寬度的 12%，越大越靠右)
+        const offsetY = screenH * 0.08;   // 往下偏移量 (視窗高度的 8%，越大越靠下)
+        const fishScale = 1.45;           // 魚的放大倍率 (1.45 代表比原本大 45%)
+
         fishes.forEach((fish, i) => {
             const data = originalFishesData[i];
-            
-            // 按手機螢幕比例重新對齊座標
-            fish.x = screenW * data.xRatio;
-            fish.y = screenH * data.yRatio;
-            fish.anchorX = screenW * data.anchorXRatio;
-            fish.anchorY = screenH * data.anchorYRatio;
-            
-            // 適度縮小手機上的金魚尺寸
-            fish.size = Math.max(50, screenW * data.sizeRatio * 1.5);
+
+            // 1. 金魚放大
+            fish.size = data.size * fishScale;
+
+            // 2. 金魚初始位置微調（跟著往右下方偏移，進入紅色腦部線條區域）
+            fish.x = (screenW * data.xRatio) + offsetX;
+            fish.y = (screenH * data.yRatio) + offsetY;
+
+            // 3. 紅點（固定錨點）往下往右偏移
+            fish.anchorX = (screenW * data.anchorXRatio) + offsetX;
+            fish.anchorY = (screenH * data.anchorYRatio) + offsetY;
         });
     }
 
