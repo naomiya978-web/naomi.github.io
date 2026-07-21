@@ -409,3 +409,124 @@ body {
         color: #0000FF;
     }
 
+/* ==========================================================================
+   📱 跨瀏覽器 (Chrome, Edge) 小螢幕與視窗縮放防破版補充碼
+   （請直接貼於 CSS 最底部，無需修改上方任何原始 Code）
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 全局設定：第一板塊背景圖片靠右對齊 & 建立定位基準
+   -------------------------------------------------------------------------- */
+#p2-section1 {
+    position: relative !important;
+    background-position: right center !important; /* 背景圖靠右對齊 */
+}
+
+/* --------------------------------------------------------------------------
+   2. 中型螢幕與縮小視窗 (寬度 <= 1024px) 排版適應
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 1024px) {
+    /* 第一板塊：面板位置轉為整體居中，避免靠左擠壓 */
+    #p2-section1 {
+        padding-left: 0 !important;
+        justify-content: center !important;
+        background-size: cover !important;
+        background-position: right center !important; /* 縮小時維持靠右 */
+    }
+
+    /* 💡 縮小時背景圖上方疊加半透明白色圖層 */
+    #p2-section1::before {
+        content: "" !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-color: rgba(255, 255, 255, 0.35) !important; /* 35% 半透明白 */
+        z-index: 1 !important;
+        pointer-events: none !important; /* 防止遮擋鼠標點擊事件 */
+    }
+
+    /* 確保控制面板的文字與按鈕浮在白色遮罩上方 */
+    .p2-s1-control-panel {
+        position: relative !important;
+        z-index: 2 !important;
+    }
+
+    /* 畫廊網格：寬度縮小時從 12 欄轉為雙欄，維持圖片比例 */
+    .p2-gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+    }
+
+    /* 重置高低錯落網格項目，使其在大約兩欄中平整排列 */
+    .item-large-left,
+    .item-vertical-mid,
+    .item-square-right,
+    .item-wide-bottom,
+    .item-small,
+    .item-medium {
+        grid-column: span 1 !important;
+        grid-row: auto !important;
+        aspect-ratio: 4 / 3 !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. 小型螢幕與手機 (寬度 <= 768px) 排版優化
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+    /* 第二板塊：邊距適度縮小 */
+    #p2-section2 {
+        padding: 40px 4% !important;
+    }
+
+    /* 畫廊網格：完全轉為單欄直向排列 */
+    .p2-gallery-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 毛玻璃呼吸按鈕：隨視窗等比例適度縮放，防止超出畫面 */
+    .p2-breath-btn {
+        width: 120px !important;
+        height: 120px !important;
+        font-size: 0.95rem !important;
+    }
+
+    .p2-s1-text {
+        font-size: 0.95rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* 右上角 Menu 按鈕邊距縮小，防止卡出螢幕外 */
+    .menu-toggle {
+        top: 20px !important;
+        right: 20px !important;
+    }
+
+    /* 側邊欄改為滿版，提升行動端操作體驗 */
+    .sidebar-box {
+        width: 100% !important;
+        padding: 60px 30px !important;
+    }
+
+    /* 彈出 Contact 視窗寬度適應 */
+    .retro-modal-overlay .retro-window {
+        width: 90vw !important;
+        max-width: 350px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   4. 全局防破版保護機制 (適用於所有現代瀏覽器)
+   -------------------------------------------------------------------------- */
+img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+#p2-section1,
+#p2-section2 {
+    box-sizing: border-box !important;
+}
