@@ -541,3 +541,119 @@ body {
     background-color: #ffffff;
     color: #0000FF;
 }
+
+/* ===================================================
+   🛠️ 針對小螢幕修正：保持頁面高度，將 to-be-continued 釘在最底部
+   =================================================== */
+/* ===================================================
+   🖼️ 背景圖片等比例縮小 + 排版防破版 + To be continued 釘底
+   =================================================== */
+
+@media screen and (max-width: 1024px) {
+    /* 1. 確保外層容器不硬撐高度，採用相對定位 */
+    .others-container {
+        min-height: 100vh !important;
+        height: auto !important;
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* 2. 強制背景圖片等比例縮小 (contain 確保整張背景圖完整縮小，不被裁切) */
+    body,
+    .others-container,
+    .section-top,
+    .section-body {
+        /* 如果希望背景整張縮小看得到全貌，用 contain；如果希望等比例縮放拉滿用 100% auto */
+        background-size: contain !important;
+        background-position: top center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important; /* 避免手機/縮小視窗時背景變形 */
+    }
+
+    /* 3. 縮小 .section-top 的邊距與視窗間距 */
+    .section-top {
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding-top: 30px !important; /* 上留白縮小 */
+        padding-bottom: 60px !important; /* 下留白縮小（留空間給底部的 To be continued） */
+        gap: 15px !important; /* 視窗之間的間距縮小 */
+    }
+
+    /* 4. 重置彈窗定位，改為垂直排列 */
+    .retro-window {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        width: 85vw !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
+    }
+
+    /* 5. 讓中間 Body 自動吸收多餘高度 */
+    .section-body {
+        flex: 1 1 auto !important;
+        min-height: 50px !important;
+    }
+
+    /* 6. 強制將 To be continued 絕對定位在整體頁面的最底部 */
+    .to-be-continued {
+        position: absolute !important;
+        bottom: 15px !important;
+        right: 20px !important;
+        z-index: 99 !important;
+    }
+}
+
+/* 2. 彈窗 (Detail Modal) 的跨瀏覽器自適應 */
+@media screen and (max-width: 900px) {
+    .detail-window {
+        width: 92vw !important;
+        max-height: 88vh !important;
+        overflow-y: auto !important;
+    }
+
+    .detail-layout {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 20px !important;
+        gap: 16px !important;
+    }
+
+    .detail-left-col {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .detail-right-col {
+        width: 100% !important;
+        align-self: stretch !important;
+    }
+
+    .detail-subtitle {
+        font-size: 1.4rem !important;
+        text-align: center !important;
+    }
+
+    .project-tag-box {
+        margin: 15px auto !important;
+        display: block !important;
+        text-align: center !important;
+    }
+
+    .detail-go-btn {
+        align-self: center !important;
+        margin: 20px auto 10px auto !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .sidebar-box {
+        width: 100vw !important;
+    }
+}
