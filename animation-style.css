@@ -308,3 +308,55 @@ body {
         background-color: #ffffff;
         color: #0000FF;
     }
+
+
+/* ===================================================
+   🛠️ 新增：Animation 頁面手機版專用 - 字體與間距縮放適配
+   （完全不影響桌機網頁版，電腦開依然維持原樣）
+   =================================================== */
+
+@media screen and (max-width: 768px) {
+    /* 1. 主標題 Animation 適度縮小，防止在手機螢幕過大 */
+    .game-main-title {
+        font-size: 2.8rem;
+        padding: 2.5vh 0;
+        letter-spacing: 3px;
+    }
+
+    /* 2. 三個按鈕中間的文字：適度縮小並確保強行單行不折行 */
+    .btn-text-center {
+        font-size: 0.9rem; /* 縮小字體以完美容納長標題 Fly Me To The Moon */
+        letter-spacing: 1px; /* 微調字距 */
+        white-space: nowrap; /* 核心：強制單行顯示，絕不折行 */
+        padding: 0 10px; /* 留出兩側安全邊距 */
+        text-align: center;
+    }
+
+    /* 3. 右上角漢堡選單按鈕位置微調 */
+    .menu-toggle {
+        top: 20px;
+        right: 20px;
+    }
+
+    /* 4. 側邊欄彈窗寬度自動適應手機螢幕 */
+    .sidebar-box {
+        width: 85vw;
+        padding: 60px 30px;
+    }
+
+    .retro-window {
+        width: 85vw;
+        max-width: 320px;
+    }
+}
+
+/* 針對畫面極窄的手機（如 iPhone SE, 寬度 380px 以下）再微調 */
+@media screen and (max-width: 380px) {
+    .game-main-title {
+        font-size: 2.2rem;
+    }
+
+    .btn-text-center {
+        font-size: 0.75rem;
+    }
+}
