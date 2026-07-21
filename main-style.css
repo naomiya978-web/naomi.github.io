@@ -549,6 +549,104 @@ section {
         font-size: 1.2rem;
     }
 
+    /* ===================================================
+   🛠️ 新增：手機版專用 - 第一板塊 (Page 1) 自動排版適配
+   （完全不影響桌機網頁版，電腦開依然維持原樣）
+   =================================================== */
+
+@media screen and (max-width: 768px) {
+    /* 1. Page 1 主容器轉為直向彈性佈局 */
+    #page1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 70px;
+        padding-left: 15px;
+        padding-right: 15px;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* 2. 第一行文字 WELCOME TO... */
+    .welcome1-text {
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+
+    /* 3. 第二行文字 NAOMI'S WORLD */
+    .welcome2-text {
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .welcome2-text .text-bg-block {
+        left: 50%;
+        top: -5px;
+        transform: translateX(-50%);
+        width: 110%;
+        height: 120%;
+    }
+
+    /* 4. 影片區塊：按手機螢幕寬度等比例縮放 */
+    .video-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 85vw; /* 佔手機寬度 85% */
+        max-width: 360px;
+        height: auto;
+        aspect-ratio: 14 / 11; /* 保持原 560x440 比例 */
+        margin-bottom: 15px;
+    }
+
+    /* 5. 影片下方的黑色區塊 */
+    .bottom-info-block {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 80vw;
+        max-width: 320px;
+        height: 60px; /* 隨手機高度適度縮減 */
+        margin-bottom: 10px;
+    }
+
+    /* 6. hello ↓ 箭頭文字 */
+    .hello-line {
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 0.9rem;
+        text-align: center;
+        line-height: 1.4;
+    }
+
+    .hello-1, .hello-2, .hello-3 {
+        top: 0;
+        left: 0;
+    }
+
+    /* 7. 手機版底部金魚畫布高度縮小，留出視覺空間 */
+    #homeFishCanvas {
+        height: 120px;
+    }
+
+    /* 8. 右上角三條線漢堡選單按鈕位移微調，防止遮擋 */
+    .menu-toggle {
+        top: 20px;
+        right: 20px;
+    }
+}
     .hello-line {
         font-size: 0.9rem;
     }
