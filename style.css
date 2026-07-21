@@ -14,11 +14,11 @@ body, html {
 /* 半人頭背景 */
 .background-head {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw; /* 依你的圖片比例調整 */
-    height: 100vh;
+    width: 1920px; /* 依你的圖片比例調整 */
+    height: 1080px;
     background-image: url('images/openpage.PNG'); /* 放入你畫的人頭 */
     background-size: contain;
     background-repeat: no-repeat;
