@@ -435,3 +435,129 @@ section {
         background-color: #ffffff;
         color: #0000FF;
     }
+
+/* ==========================================================================
+   📱 跨瀏覽器 (Chrome, Edge) 小螢幕與視窗縮放防破版補充碼
+   （請直接貼於 CSS 最底部，無需修改上方任何原始 Code）
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 平板與小型筆電 (寬度 <= 1024px) 佈局自適應
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 1024px) {
+    /* 通用 Section 高度彈性化，避免內容溢出 */
+    section {
+        min-height: auto !important;
+        height: auto !important;
+    }
+
+    /* 第一板塊：背景自動等比例縮放 */
+    #section1 {
+        min-height: 100vh !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        padding: 40px 20px !important;
+    }
+
+    .s1-center-text {
+        font-size: 2.8rem !important; /* 適度縮小中央大字 */
+    }
+
+    /* 第二板塊：改為垂直上下排列 */
+    #section2 {
+        flex-direction: column !important;
+        padding: 60px 5% !important;
+        gap: 40px !important;
+    }
+
+    .s2-char-img-box {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        max-width: 400px !important; /* 人物圖縮放適應 */
+        margin: 0 auto !important;
+    }
+
+    .s2-retro-window {
+        width: 100% !important;
+    }
+
+    /* 第三、四、五板塊：雙圖並排改為單欄上下排列 */
+    #section3, #section4, #section5 {
+        flex-direction: column !important;
+        padding: 40px 5% !important;
+        gap: 25px !important;
+    }
+
+    .s3-img-box, .s4-img-box, .s5-img-box {
+        width: 100% !important;
+    }
+
+    /* 故事區塊邊距調整 */
+    .story-section {
+        padding: 60px 8% !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   2. 手機與極窄視窗 (寬度 <= 768px) 細節精緻調整
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+    /* 第一板塊標題文字再縮放 */
+    .s1-center-text {
+        font-size: 2rem !important;
+        letter-spacing: 2px !important;
+    }
+
+    /* 復古視窗內部留白微調 */
+    .s2-window-body {
+        padding: 20px 15px !important;
+    }
+
+    .s2-char-name {
+        font-size: 1.4rem !important;
+    }
+
+    .s2-info-item {
+        font-size: 0.95rem !important;
+    }
+
+    /* 故事段落落字優化 */
+    .story-section {
+        padding: 50px 5% !important;
+    }
+
+    .story-paragraph {
+        font-size: 1rem !important;
+        line-height: 1.8 !important;
+    }
+
+    /* 右上角 Menu 按鈕邊距縮小，防止超出螢幕 */
+    .menu-toggle {
+        top: 20px !important;
+        right: 20px !important;
+    }
+
+    /* 側邊欄改為寬度滿版，體驗更好 */
+    .sidebar-box {
+        width: 100% !important;
+        padding: 60px 30px !important;
+    }
+
+    /* 復古彈窗 Modal 適應手機寬度 */
+    .retro-window {
+        width: 90vw !important;
+        max-width: 350px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. 圖片與容器全面防破版保護機制 (CSS Reset 補強)
+   -------------------------------------------------------------------------- */
+img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+.s2-retro-window, .s3-img-box, .s4-img-box, .s5-img-box {
+    box-sizing: border-box !important;
+}
