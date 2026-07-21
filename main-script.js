@@ -187,3 +187,15 @@ if (modalOkClose && retroModal) {
         retroModal.classList.remove('show');
     });
 }
+
+// ===================================================
+// 🛠️ 新增：第一板塊金魚畫布 視窗縮放即時適配
+// （自動監聽視窗變化，完全不修改原始程式碼）
+// ===================================================
+window.addEventListener('resize', () => {
+    const homeCanvas = document.getElementById('homeFishCanvas');
+    if (homeCanvas) {
+        homeCanvas.width = window.innerWidth;
+        homeCanvas.height = homeCanvas.clientHeight;
+    }
+});
