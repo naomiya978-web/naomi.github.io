@@ -1029,8 +1029,7 @@ body {
 }
 
 /* ===================================================
-   🛠️ 跨瀏覽器（Chrome / Edge）統一防破版修正碼
-   （完全不修改你原始 Code，貼在最底部即生效）
+   🛠️ 跨瀏覽器統一防破版修正碼（完全統一為 Edge 視覺效果）
    =================================================== */
 
 /* 當視窗寬度小於 1024px 時（包含 Chrome 與 Edge 的響應式縮放） */
@@ -1041,51 +1040,69 @@ body {
         padding: 40px 0;
     }
 
-    /* 1. 統一 Chrome 與 Edge 的第一板塊單欄順序 */
+    /* 1. 強制重置 Flex 佈局方向：圖片在上，文字在下 */
     .intro-content-wrapper {
         flex-direction: column !important;
-        justify-content: center !important;
+        justify-content: flex-start !important;
         align-items: center !important;
     }
 
-    /* 讓左側（圖片）與右側（文字包裝盒）恢復正常上下排列，消除 order 錯亂 */
+    /* 2. 左側區域（圖片）：鎖定在第一位 (order: 1) */
     .intro-left {
         order: 1 !important;
         width: 90vw !important;
         height: auto !important;
         padding: 0 !important;
-    }
-
-    .intro-right {
-        order: 2 !important;
-        width: 90vw !important;
-        height: auto !important;
-        padding: 0 !important;
-        margin-top: 25px;
-        /* ✨ 半透明背景，確保 Chrome 縮小視窗時文字依然清晰 */
-        background: rgba(255, 255, 255, 0.92);
-        padding: 20px !important;
-        border-radius: 4px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        z-index: 25;
-    }
-
-    /* 重置內部文字與標題的順序與位移，防止 Chrome 將其抽離 */
-    .project-title,
-    .introduction-text {
-        order: initial !important;
-        transform: none !important;
+        margin-bottom: 20px;
     }
 
     .project-img-box-1 {
         height: 280px;
-        border-left: 3px solid #000000; /* 補齊左邊框 */
+        border-left: 3px solid #000000;
         border-right: 3px solid #000000;
         margin-bottom: 0;
         transform: none !important;
     }
 
-    /* --- 其他板塊相容性微調 --- */
+    /* 3. 右側區域（文字包裝盒）：鎖定在第二位 (order: 2)，移除所有白框背景 */
+    .intro-right {
+        order: 2 !important;
+        width: 90vw !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important; /* 徹底移除白框，恢復透明背景 */
+        box-shadow: none !important;        /* 移除外陰影 */
+        border-radius: 0 !important;
+    }
+
+    .safe-zone-content {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    /* 4. 鎖定文字內部順序：標題 (order: 1) ➔ 內文 (order: 2) ➔ UNITY標籤 (order: 3) */
+    .project-title {
+        order: 1 !important;
+        transform: none !important;
+        margin-top: 0 !important;
+        margin-bottom: 15px !important;
+    }
+
+    .introduction-text {
+        order: 2 !important;
+        transform: none !important;
+        margin-top: 0 !important;
+        margin-bottom: 15px !important;
+    }
+
+    .project-tag-box {
+        order: 3 !important;
+        margin-top: 5px !important;
+    }
+
+    /* --- 其他板塊保持適配 --- */
     .carousel-card {
         width: 80vw;
         height: 280px;
@@ -1122,7 +1139,7 @@ body {
     }
 }
 
-/* 當視窗高度過矮時，自動清除負向位移 */
+/* 當視窗高度過矮時，清除負向位移 */
 @media screen and (max-height: 650px) {
     .project-title, 
     .introduction-text,
@@ -1131,14 +1148,10 @@ body {
     }
 }
 
-/* 手機端與極小視窗（< 768px） */
+/* 手機端與極小視窗（< 768px）微調 */
 @media screen and (max-width: 768px) {
-    .intro-right {
-        padding: 15px !important;
-    }
-
     .project-title {
-        font-size: 2rem !important;
+        font-size: 2.2rem !important;
     }
 
     .bottom-bg-decor2 {
