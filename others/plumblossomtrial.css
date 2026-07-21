@@ -35,7 +35,7 @@ section {
    ========================================================================== */
 #section1 {
     /* 💡 請在這裡替換你的 bg1.png 圖片路徑 */
-    background: url('../images/others1/bg1.png') no-repeat center center;
+    background: url('../images/others1/bg1.jpg') no-repeat center center;
     background-size: cover;
     justify-content: center;
     align-items: center;
