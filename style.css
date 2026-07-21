@@ -99,3 +99,61 @@ html, body {
     transform-origin: center center;
     flex-shrink: 0;
 }
+
+/* ==========================================
+   新增：手機與行動裝置響應式適配 (Mobile Responsive)
+   ========================================== */
+
+/* 1. 針對手機與平板等小螢幕 (寬度 <= 768px) 的自動轉向與佈局微調 */
+@media screen and (max-width: 768px) {
+    
+    /* 讓按鈕在手機上更容易點擊 */
+    #openBtn {
+        width: 140px;
+        height: 70px;
+        font-size: 1rem;
+    }
+
+    /* 隱藏手機瀏覽器滾動條與防誤觸下拉刷新 */
+    html, body {
+        touch-action: none;
+        overscroll-behavior: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}
+
+/* 2. 直屏（Portrait）模式提示遮罩（選擇性顯示） */
+#portraitNotice {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(5, 11, 20, 0.95);
+    color: #ffffff;
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    line-height: 1.8;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#portraitNotice img {
+    width: 50px;
+    margin-bottom: 20px;
+    filter: invert(1);
+    animation: rotatePhone 2s infinite ease-in-out;
+}
+
+@keyframes rotatePhone {
+    0%, 10% { transform: rotate(0deg); }
+    40%, 60% { transform: rotate(-90deg); }
+    90%, 100% { transform: rotate(0deg); }
+}
