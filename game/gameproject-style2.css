@@ -384,18 +384,12 @@ body {
     font-size: 0;
 }
 
+.video-local-wrapper iframe,
 .project-local-video {
     width: 100%;
     height: auto;
     display: block;
     outline: none;
-}
-
-/* iframe 填滿外層容器 */
-.project-local-video {
-    width: 100%;
-    height: 100%;
-    border: none;
 }
 
 
