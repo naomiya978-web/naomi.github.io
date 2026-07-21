@@ -706,23 +706,65 @@ body {
         background-position: center bottom;
     }
 }
+/* ---------------------------------------------------
+   2. 手機端極小視窗適配（<= 768px）
+   --------------------------------------------------- */
+@media screen and (max-width: 768px) {
+    .project-section {
+        padding: 40px 16px;
+    }
 
-/* 當視窗高度過矮時，自動清除負向位移 */
+    .project-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 20px !important;
+    }
+
+    .introduction-text {
+        font-size: 0.95rem !important;
+        line-height: 1.8 !important;
+    }
+
+    /* 手機端圖片高度調降，符合手機比例 */
+    .project-img-box-1 {
+        height: 220px !important;
+    }
+
+    /* 手機端裝飾圖調整 */
+    .bottom-bg-decor {
+        max-width: 280px !important;
+    }
+
+    /* 輪播卡片手機端尺寸 */
+    .carousel-slider {
+        height: 240px;
+    }
+
+    .carousel-card {
+        width: 90vw;
+        height: 200px;
+    }
+
+        .carousel-card.next {
+            transform: translate3d(40px, 0, -50px) scale(0.85);
+        }
+
+        .carousel-card.prev {
+            transform: translate3d(-40px, 0, -50px) scale(0.85);
+        }
+
+    .bottom-bg-decor2 {
+        width: 140px;
+        opacity: 0.5;
+    }
+}
+
+/* ---------------------------------------------------
+   3. 高度過矮螢幕微調（<= 650px 高度）
+   --------------------------------------------------- */
 @media screen and (max-height: 650px) {
     .project-title,
     .introduction-text,
     .project-img-box-1 {
         transform: none !important;
-    }
-}
-
-/* 手機端與極小視窗（< 768px） */
-@media screen and (max-width: 768px) {
-    .intro-right {
-        padding: 15px !important;
-    }
-
-    .project-title {
-        font-size: 2rem !important;
     }
 }
