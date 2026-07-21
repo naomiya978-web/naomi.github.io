@@ -1027,3 +1027,110 @@ body {
         justify-content: center;
     }
 }
+
+/* ===================================================
+   🛠️ 視窗極限縮小防破版保護（完全不影響大螢幕原始排版）
+   =================================================== */
+
+/* 當視窗寬度小於 1024px 時，進行單欄結構轉換與容器防溢出 */
+@media screen and (max-width: 1024px) {
+    .project-section {
+        height: auto;
+        min-height: 100vh;
+        padding: 40px 0;
+    }
+
+    /* --- 第一板塊適配與文字清晰度防護 --- */
+    .intro-content-wrapper {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .intro-left, .intro-right {
+        width: 90vw;
+        padding: 0;
+    }
+
+    .intro-right {
+        /* ✨ 新增：給予文字區域乾淨半透明背景，徹底避免背景圖或角落裝飾干擾閱讀 */
+        background: rgba(255, 255, 255, 0.92);
+        padding: 25px;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin-top: 15px;
+        z-index: 25; /* 確保高於背景裝飾 */
+    }
+
+    .project-img-box-1 {
+        height: 280px;
+        border-right: 3px solid #000000;
+        margin-bottom: 10px;
+    }
+
+    .project-title, .introduction-text {
+        transform: none;
+    }
+
+    /* --- 其他板塊縮小適配 --- */
+    .carousel-card {
+        width: 80vw;
+        height: 280px;
+    }
+
+    .characters-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .char-avatar-menu {
+        flex-direction: row;
+    }
+
+    .char-panel {
+        flex-direction: column;
+        position: relative;
+    }
+
+    .char-center-lipic {
+        width: 100%;
+        height: 300px;
+    }
+
+    .char-right-info {
+        width: 100%;
+    }
+
+    /* --- 背景圖與裝飾圖適配 --- */
+    .full-page-characters,
+    .full-page-video,
+    .full-page-website {
+        background-size: cover;
+        background-position: center bottom;
+    }
+
+
+}
+
+/* 當視窗高度過矮時（例如把瀏覽器拉很扁），自動微調標題與內文邊距 */
+@media screen and (max-height: 650px) {
+    .project-title, .introduction-text {
+        transform: none;
+    }
+}
+
+/* 2. 當視窗寬度小於 768px 時（手機或極小視窗） */
+@media screen and (max-width: 768px) {
+    .intro-right {
+        padding: 18px; /* 手機端邊距稍微收緊 */
+    }
+
+    .project-title {
+        font-size: 2.2rem; /* 手機端標題微調大小 */
+    }
+
+    .bottom-bg-decor2 {
+        width: 180px;
+        opacity: 0.5;
+    }
+}
