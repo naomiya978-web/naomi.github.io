@@ -378,18 +378,26 @@ body {
 
 .video-local-wrapper {
     width: 100%;
+    max-width: 900px; /* 限制最大寬度，才不會太滿，可依喜好調整 */
+    margin: 0 auto;   /* 居中顯示 */
+    
+    /* 核心固定比例：強制維持 16:9 畫面比例 */
+    aspect-ratio: 16 / 9; 
+    
+    /* 你的外框與陰影樣式 */
     border: 3px solid #000000;
     box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.1);
     background-color: #000000;
-    font-size: 0;
+    box-sizing: border-box; /* 確保邊框不會擠壓影片尺寸 */
 }
 
 .video-local-wrapper iframe,
 .project-local-video {
     width: 100%;
-    height: auto;
+    height: 100%; /* ★ 必須改為 100%，不能寫 auto！ */
     display: block;
     outline: none;
+    border: none;
 }
 
 
