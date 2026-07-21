@@ -473,6 +473,7 @@ body {
     font-size: 0;
 }
 
+.video-local-wrapper iframe,
 .project-local-video {
     width: 100%;
     height: auto;
