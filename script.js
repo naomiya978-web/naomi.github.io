@@ -260,7 +260,7 @@ autoScaleWrapper();
         // 🎯【微調參數】請根據視覺效果調整以下三個數值：
         const offsetX = screenW * 0.12;   // 往右偏移量 (視窗寬度的 12%，越大越靠右)
         const offsetY = screenH * 0.08;   // 往下偏移量 (視窗高度的 8%，越大越靠下)
-        const fishScale = 1.45;           // 魚的放大倍率 (1.45 代表比原本大 45%)
+        const fishScale = 1.15;           // 魚的放大倍率 (1.45 代表比原本大 45%)
 
         fishes.forEach((fish, i) => {
             const data = originalFishesData[i];
