@@ -106,7 +106,11 @@ html, body {
 @media screen and (max-width: 768px), (orientation: portrait) {
     .background-head {
         /* 當寬度小於等於 768px 或視窗變為直向時，自動切換為 1080x1920 的直版背景 */
-        background-image: url('images/openpage1.PNG') !important;
-        background-size: cover; /* 直版背景建議使用 cover 鋪滿畫面，若想完整顯示可改為 contain */
+        background-image: url('images/openpage1.png') !important;
+        
+        /* 💡 改為 contain：確保整張 1080x1920 的圖完全顯示，不被放大裁切 */
+        background-size: contain !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
     }
 }
