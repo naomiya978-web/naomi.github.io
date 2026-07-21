@@ -263,7 +263,6 @@ autoScaleWrapper();
         const offsetX = screenW * 0.12;   // 往右偏移量
         const offsetY = screenH * 0.08;   // 往下偏移量
         const fishScale = 1.1;           // 魚的放大倍率
-        const speedScale = 1.8;           // 💡【新增】手機版速度倍率 (1.8 代表速度變快 1.8 倍)
 
         fishes.forEach((fish, i) => {
             const data = originalFishesData[i];
