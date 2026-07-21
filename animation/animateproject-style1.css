@@ -570,118 +570,160 @@ body {
     }
 
 /* ===================================================
-   手機版響應式微調 (RWD)
+   🛠️ 跨瀏覽器（Chrome / Edge）統一防破版修正碼
+   （完全不修改你原始 Code，貼在最底部即生效）
    =================================================== */
-@media (max-width: 900px) {
+
+
+/* 當視窗寬度小於 1024px 時（包含 Chrome 與 Edge 的響應式縮放） */
+@media screen and (max-width: 1024px) {
     .project-section {
         height: auto;
         min-height: 100vh;
-        padding: 60px 24px;
+        padding: 40px 0;
     }
 
+    /* 1. 統一 Chrome 與 Edge 的第一板塊單欄順序 */
     .intro-content-wrapper {
-        flex-direction: column;
-        gap: 30px;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 
-    .intro-left, .intro-right {
-        width: 100% !important;
-        padding: 0 !important;
+    /* 讓左側（圖片）與右側（文字包裝盒）恢復正常上下排列，消除 order 錯亂 */
+    .intro-left {
+        order: 1 !important;
+        width: 90vw !important;
         height: auto !important;
+        padding: 0 !important;
     }
 
     .intro-right {
-        display: flex;
-        flex-direction: column;
+        order: 2 !important;
+        width: 90vw !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin-top: 25px;
+        /* ✨ 半透明背景，確保 Chrome 縮小視窗時文字依然清晰 */
+        background: rgba(255, 255, 255, 0.92);
+        padding: 20px !important;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        z-index: 25;
     }
 
-    .project-title {
-        order: 1;
-        font-size: 2.2rem !important;
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    .intro-left {
-        order: 2;
-    }
-
-    .project-img-box-1 {
-        border-left: 3px solid #000000;
-        height: 240px !important;
+    /* 重置內部文字與標題的順序與位移，防止 Chrome 將其抽離 */
+    .project-title,
+    .introduction-text {
+        order: initial !important;
         transform: none !important;
     }
 
-    .introduction-text {
-        order: 3;
-        margin-top: 20px;
+    .project-img-box-1 {
+        height: 280px;
+        border-left: 3px solid #000000; /* 補齊左邊框 */
+        border-right: 3px solid #000000;
+        margin-bottom: 0;
+        transform: none !important;
     }
 
-    .bottom-bg-decor {
-        position: relative;
-        bottom: 0;
-        left: 0;
-        margin-top: 30px;
-        width: 150px;
-        order: 4;
-    }
-
+    /* --- 其他板塊相容性微調 --- */
     .carousel-card {
-        width: 280px;
-        height: 180px;
-    }
-
-    .carousel-slider {
-        height: 260px;
-    }
-
-    .carousel-card.next {
-        transform: translate3d(100px, 0, -80px) scale(0.8);
-    }
-
-    .carousel-card.prev {
-        transform: translate3d(-100px, 0, -80px) scale(0.8);
-    }
-
-    .carousel-arrow::after {
-        border-width: 12px 16px 12px 0;
-    }
-
-    .arrow-right::after {
-        border-width: 12px 0 12px 16px;
+        width: 80vw;
+        height: 280px;
     }
 
     .characters-container {
         flex-direction: column;
         height: auto;
-        gap: 30px;
     }
 
     .char-avatar-menu {
         flex-direction: row;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .avatar-item {
-        width: 60px;
-        height: 60px;
     }
 
     .char-panel {
-        position: relative;
         flex-direction: column;
-        height: auto;
+        position: relative;
     }
 
     .char-center-lipic {
         width: 100%;
-        height: 350px;
-        margin-bottom: 20px;
+        height: 300px;
     }
 
     .char-right-info {
         width: 100%;
-        justify-content: center;
+    }
+
+    .full-page-characters,
+    .full-page-video,
+    .full-page-website {
+        background-size: cover;
+        background-position: center bottom;
     }
 }
+
+/* ---------------------------------------------------
+   2. 手機端極小視窗適配（<= 768px）
+   --------------------------------------------------- */
+@media screen and (max-width: 768px) {
+    .project-section {
+        padding: 40px 16px;
+    }
+
+    .project-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 20px !important;
+    }
+
+    .introduction-text {
+        font-size: 0.95rem !important;
+        line-height: 1.8 !important;
+    }
+
+    /* 手機端圖片高度調降，符合手機比例 */
+    .project-img-box-1 {
+        height: 220px !important;
+    }
+
+    /* 手機端裝飾圖調整 */
+    .bottom-bg-decor {
+        max-width: 280px !important;
+    }
+
+    /* 輪播卡片手機端尺寸 */
+    .carousel-slider {
+        height: 240px;
+    }
+
+    .carousel-card {
+        width: 90vw;
+        height: 200px;
+    }
+
+        .carousel-card.next {
+            transform: translate3d(40px, 0, -50px) scale(0.85);
+        }
+
+        .carousel-card.prev {
+            transform: translate3d(-40px, 0, -50px) scale(0.85);
+        }
+
+    .bottom-bg-decor2 {
+        width: 140px;
+        opacity: 0.5;
+    }
+}
+
+/* ---------------------------------------------------
+   3. 高度過矮螢幕微調（<= 650px 高度）
+   --------------------------------------------------- */
+@media screen and (max-height: 650px) {
+    .project-title,
+    .introduction-text,
+    .project-img-box-1 {
+        transform: none !important;
+    }
+}
+
