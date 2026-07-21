@@ -207,3 +207,29 @@ canvas.addEventListener('mousemove', function (event) {
         canvas.style.cursor = 'default';  // 變回普通箭頭
     }
 });
+
+// ==========================================
+// 新增：動態計算視窗比例並進行 transform: scale 縮放
+// ==========================================
+function autoScaleWrapper() {
+    const wrapper = document.getElementById('app-wrapper');
+    if (!wrapper) return;
+
+    const baseWidth = 1920;
+    const baseHeight = 1080;
+
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // 計算最佳縮放比例 (保持 16:9 比例不變形)
+    const scaleX = windowWidth / baseWidth;
+    const scaleY = windowHeight / baseHeight;
+    const scale = Math.min(scaleX, scaleY);
+
+    wrapper.style.transform = `scale(${scale})`;
+}
+
+// 監聽視窗改變與載入完成事件
+window.addEventListener('resize', autoScaleWrapper);
+window.addEventListener('DOMContentLoaded', autoScaleWrapper);
+autoScaleWrapper();
