@@ -450,3 +450,106 @@ section {
         .menu-btn:hover .btn-text {
             color: #ffffff;
         }
+
+/* ===================================================
+   🛠️ 新增：第一板塊 (Page 1) 視窗縮小/手機版 RWD 自適應縮放
+   （完全不影響大螢幕桌機版的原始排版與 Code）
+   =================================================== */
+
+@media screen and (max-width: 1024px) {
+    /* 讓 Page 1 改為彈性垂直居中排列，避免元件跑出螢幕 */
+    #page1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px 20px 20px;
+        position: relative;
+    }
+
+    /* 標題一： WELCOME TO... */
+    .welcome1-text {
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 5vw; /* 使用視窗寬度單位 vw，隨視窗大小動態縮放 */
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* 標題二： NAOMI'S WORLD */
+    .welcome2-text {
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 5vw;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+        .welcome2-text .text-bg-block {
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110%;
+            height: 110%;
+        }
+
+    /* 影片容器：按比例縮小並保持居中 */
+    .video-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 85vw;
+        max-width: 500px;
+        height: auto;
+        aspect-ratio: 14 / 11; /* 保持原 560x440 的影片比例 */
+        margin-bottom: 15px;
+    }
+
+    /* 黑底區塊：按比例縮小並覆蓋/適配下方 */
+    .bottom-info-block {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 80vw;
+        max-width: 400px;
+        height: auto;
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    /* hello ↓ 箭頭文字居中與尺寸自適應 */
+    .hello-line {
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 3.5vw;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    /* 金魚畫布：縮小時固定於視窗最下方 */
+    #homeFishCanvas {
+        height: 180px;
+    }
+
+    /* 右上角選單按鈕適度微調定位，防止與文字碰撞 */
+    .menu-toggle {
+        top: 20px;
+        right: 20px;
+    }
+}
+
+/* 超小螢幕手機（寬度 480px 以下）字體再微調 */
+@media screen and (max-width: 480px) {
+    .welcome1-text,
+    .welcome2-text {
+        font-size: 1.2rem;
+    }
+
+    .hello-line {
+        font-size: 0.9rem;
+    }
+}
