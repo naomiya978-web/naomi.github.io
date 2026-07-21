@@ -69,7 +69,7 @@ const fishes = [
         vx: -0.8, vy: -0.2,         // ★ 速度調慢（原本為 -1.8 / -0.4）
         size: 110,                  // 金魚尺寸
         angle: Math.PI / 2,
-        url: 'illustration.html'
+        url: '../naomi.github.io/illustration.html'
     },
     {
         x: 1400, y: 100,
@@ -77,7 +77,7 @@ const fishes = [
         vx: -0.8, vy: -0.15,         // ★ 速度調慢（原本為 -1.8 / -0.4）
         size: 110,                  // 金魚尺寸
         angle: Math.PI / 2,
-        url: 'others.html'
+        url: '../naomi.github.io/others.html'
     },
     {
         x: 300, y: 240,
