@@ -17,8 +17,8 @@ body, html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 1700px; /* 依你的圖片比例調整 */
-    height: 1160px;
+    width: 1920px; /* 依你的圖片比例調整 */
+    height: 1080px;
     background-image: url('images/openpage.PNG'); /* 放入你畫的人頭 */
     background-size: contain;
     background-repeat: no-repeat;
