@@ -376,12 +376,19 @@ body {
     letter-spacing: 1px;
 }
 
-/* 外層容器：控制最大寬度並維持 16:9 比例 */
 .video-local-wrapper {
     width: 100%;
-    max-width: 900px; /* 依照你的設計調整最大寬度 */
-    aspect-ratio: 16 / 9; /* 維持 16:9 影片比例 */
-    margin: 0 auto;
+    border: 3px solid #000000;
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.1);
+    background-color: #000000;
+    font-size: 0;
+}
+
+.project-local-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    outline: none;
 }
 
 /* iframe 填滿外層容器 */
